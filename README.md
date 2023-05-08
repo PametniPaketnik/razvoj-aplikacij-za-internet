@@ -1,6 +1,6 @@
 # Spletna aplikacija
 
-Repository za spletno aplikacijo pri predmetu RAI.
+Web app for project pametni paketnik.
 
 # Run
 
