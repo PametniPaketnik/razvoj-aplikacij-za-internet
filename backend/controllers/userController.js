@@ -51,6 +51,10 @@ module.exports = {
      * userController.create()
      */
     create: function (req, res) {
+        if(req.body.password !== req.body.retype_password) {
+            return res.redirect('/error');
+        }
+
         var user = new UserModel({
 			username : req.body.username,
 			password : req.body.password,
