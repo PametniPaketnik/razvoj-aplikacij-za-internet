@@ -9,6 +9,12 @@ var userSchema = new Schema({
     'street' : String,
     'postcode' : Int,
     'post' : String,
-    'open' : Boolean
+    'open' : Boolean,
+    'date' : Date,
+    'userId' :
+        {
+            type: Schema.Types.ObjectId,
+            ref : 'user'
+        }
 
 });
