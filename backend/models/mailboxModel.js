@@ -1,9 +1,8 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
 const mongoose = require("mongoose");
 var Schema   = mongoose.Schema;
 
-var userSchema = new Schema({
+var mailBoxSchema = new Schema({
     'id' : Int,
     'name' : String,
     'street' : String,
@@ -12,12 +11,12 @@ var userSchema = new Schema({
     'open' : Boolean,
     'date' : Date,
     'userId' :
-        {
-            type: Schema.Types.ObjectId,
-            ref : 'user'
-        }
+    {
+        type: Schema.Types.ObjectId,
+        ref : 'user'
+    }
 
 });
 
-var MailBox = mongoose.model('mailbox', userSchema);
+var MailBox = mongoose.model('mailbox', mailBoxSchema);
 module.exports = MailBox;
