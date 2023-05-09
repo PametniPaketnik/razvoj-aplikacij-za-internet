@@ -18,3 +18,6 @@ var userSchema = new Schema({
         }
 
 });
+
+var MailBox = mongoose.model('mailbox', userSchema);
+module.exports = MailBox;
