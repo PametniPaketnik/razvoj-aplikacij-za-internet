@@ -137,5 +137,11 @@ module.exports = {
 
     publish: function(req, res){
         return res.render('mailbox/publish');
+    },
+
+    update: function(req, res){
+        return res.render('mailbox/update');
     }
+
+
 };

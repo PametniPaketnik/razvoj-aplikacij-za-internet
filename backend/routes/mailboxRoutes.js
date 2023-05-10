@@ -18,6 +18,7 @@ function requiresLogin(req, res, next){
 router.get('/', mailboxController.list);
 
 router.get('/publish', requiresLogin, mailboxController.publish);
+router.get('/update', requiresLogin, mailboxController.update);
 router.get('/:id', mailboxController.show);
 
 
@@ -25,6 +26,6 @@ router.post('/', requiresLogin,upload.single('image'), mailboxController.create)
 
 router.put('/:id', mailboxController.update);
 
-router.delete('/:id', mailboxController.remove);
+router.delete('/delete/:id', mailboxController.remove);
 
 module.exports = router;
