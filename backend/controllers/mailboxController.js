@@ -16,7 +16,7 @@ module.exports = {
                 });
             }
 
-            return res.json(mailBox);
+            return res.render('mailbox/list');
         });
     },
 
