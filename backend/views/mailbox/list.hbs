@@ -15,7 +15,7 @@
                         <p class="card-text">User: {{userId.username}}</p>
                         <div class="d-flex justify-content-end">
                             <a href="/mailboxes/{{_id}}" class="btn btn-sm btn-primary mr-2">More Info</a>
-                            <a href="/mailboxes/update" class="btn btn-sm btn-primary mr-2">Edit</a>
+                            <a href="/mailboxes/update/{{_id}}" class="btn btn-sm btn-primary mr-2">Edit</a>
                             <button class="btn btn-sm btn-danger" onclick="delet('{{_id}}')">Delete</button>
                         </div>
                     </div>

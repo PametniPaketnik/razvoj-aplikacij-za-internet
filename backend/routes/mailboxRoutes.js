@@ -18,7 +18,7 @@ function requiresLogin(req, res, next){
 router.get('/', mailboxController.list);
 
 router.get('/publish', requiresLogin, mailboxController.publish);
-router.get('/update', requiresLogin, mailboxController.update);
+router.get('/update/:id', requiresLogin, mailboxController.update);
 router.get('/:id', mailboxController.show);
 
 
