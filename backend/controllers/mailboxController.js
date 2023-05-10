@@ -31,7 +31,7 @@ module.exports = {
 
         MailBoxModel.findOne({_id: id})
             .populate('userId')
-            .exec(function (err, questions) {
+            .exec(function (err, mailbox) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting mailbox.',
@@ -45,7 +45,9 @@ module.exports = {
                 });
             }
 
-            return res.render('mailbox/comment');
+            var data = [];
+            data.mailbox = mailbox;
+            return res.render('mailbox/show', data);
         });
     },
 

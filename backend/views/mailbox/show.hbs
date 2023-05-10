@@ -1,0 +1,46 @@
+<h1 class="mt-4">Mailbox:</h1>
+<div class="col-12 mb-3">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Name: {{mailbox.name}}</h3>
+            <p class="card-text">Street: {{mailbox.street}}</p>
+            <p class="card-text">Postcode: {{mailbox.postcode}}</p>
+            <p class="card-text">Post: {{mailbox.post}}</p>
+            <p class="card-text">Open: {{mailbox.open}}</p>
+            <p class="card-text">Date: {{mailbox.date}}</p>
+            <p class="card-text">User: {{mailbox.userId.username}}</p>
+            <div class="d-flex justify-content-end">
+                <a href="/mailboxes/update" class="btn btn-sm btn-primary mr-2">Edit</a>
+                <button class="btn btn-sm btn-danger" onclick="delet('{{_id}}')">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function delet(id) {
+
+        const data = {
+            id: id,
+        };
+
+        fetch("/mailboxes/delete/" + id, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    location.reload();
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+    }
+
+</script>
