@@ -13,6 +13,13 @@ function requiresLogin(req, res, next){
 }
 
 router.get('/', mailboxController.list);
+router.get('/publish', requiresLogin, mailboxController.publish);
 router.get('/:id', mailboxController.show);
+
+router.post('/', requiresLogin, mailboxController.create);
+
+router.put('/:id', mailboxController.update);
+
+router.delete('/:id', mailboxController.remove);
 
 module.exports = router;
