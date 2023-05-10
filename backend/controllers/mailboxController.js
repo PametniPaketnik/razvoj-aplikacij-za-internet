@@ -10,15 +10,16 @@ module.exports = {
     list: function (req, res) {
         MailBoxModel.find()
             .populate('userId')
-            .exec(function (err, questions) {
+            .exec(function (err, mailboxes) {
             if (err) {
                 return res.status(500).json({
-                    message: 'Error when getting user.',
+                    message: 'Error when getting mailboxes.',
                     error: err
                 });
             }
-
-            return res.render('mailbox/list');
+            var data = [];
+            data.mailboxes = mailboxes;
+            return res.render('mailbox/list', data);
         });
     },
 
@@ -53,14 +54,16 @@ module.exports = {
      */
     create: function (req, res) {
         var mailbox = new MailBoxModel({
+
             name : req.body.name,
-            street : req.session.street,
+            street : req.body.street,
             postcode : req.body.postcode,
             post : req.body.post,
             open : req.body.open,
             date : new Date(),
             userId : req.session.userId
         });
+
 
         mailbox.save(function (err, mailbox) {
             if (err) {

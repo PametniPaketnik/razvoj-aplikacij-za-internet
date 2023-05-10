@@ -1,10 +1,22 @@
-<h1>Mailboxes:</h1>
-{{#each mailboxes}}
-    <h3> Name: {{name}} </h3>
-    <p> Street: {{street}} </p>
-    <p> Postcode: {{postcode}} </p>
-    <p> Post: {{post}} </p>
-    <p> Open: {{open}} </p>
-    <p> Date: {{date}} </p>
-    <p> User: {{userId.username}} </p>
-{{/each}}
+<div class="container">
+    <h1 class="mt-4">Mailboxes:</h1>
+    <a href="/mailboxes/publish" class="btn btn-primary mb-3">ADD MAILBOX</a>
+    <div class="row">
+        {{#each mailboxes}}
+            <div class="col-12 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Name: {{name}}</h3>
+                        <p class="card-text">Street: {{street}}</p>
+                        <p class="card-text">Postcode: {{postcode}}</p>
+                        <p class="card-text">Post: {{post}}</p>
+                        <p class="card-text">Open: {{open}}</p>
+                        <p class="card-text">Date: {{date}}</p>
+                        <p class="card-text">User: {{userId.username}}</p>
+                    </div>
+                    <button class="btn btn-sm btn-danger" onclick="delet('{{_id}}')">delete</button>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
