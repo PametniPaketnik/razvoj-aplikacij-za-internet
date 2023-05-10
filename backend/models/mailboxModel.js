@@ -1,12 +1,10 @@
 var mongoose = require('mongoose');
-const mongoose = require("mongoose");
 var Schema   = mongoose.Schema;
 
 var mailBoxSchema = new Schema({
-    'id' : Int,
     'name' : String,
     'street' : String,
-    'postcode' : Int,
+    'postcode' : Number,
     'post' : String,
     'open' : Boolean,
     'date' : Date,
