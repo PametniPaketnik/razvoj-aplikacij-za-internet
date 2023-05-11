@@ -63,8 +63,6 @@ module.exports = {
             tel : req.body.tel,
             street : req.body.street,
             postcode : req.body.postcode,
-            post : req.body.post
-
         });
 
         user.save(function (err, user) {

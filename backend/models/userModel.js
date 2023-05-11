@@ -14,8 +14,7 @@ var userSchema = new Schema({
 	'lastName' : String,
 	'tel' : String,
 	'street' : String,
-	'postcode' : Number,
-	'post' : String
+	'postcode' : String,
 });
 
 userSchema.pre('save', function(next){
