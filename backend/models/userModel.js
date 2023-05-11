@@ -5,7 +5,14 @@ var Schema   = mongoose.Schema;
 var userSchema = new Schema({
 	'username' : String,
 	'password' : String,
-	'email' : String
+	'email' : String,
+	'firstName' : String,
+	'lastName' : String,
+	'tel' : String,
+	'street' : String,
+	'postcode' : Number,
+	'post' : String,
+
 });
 
 userSchema.pre('save', function(next){
