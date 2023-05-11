@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mailboxController = require('../controllers/mailboxController.js');
 
+var multer = require('multer');
+var upload = multer({dest: 'public/mailboxes/'});
+
 function requiresLogin(req, res, next){
     if(req.session && req.session.userId){
         return next();
@@ -18,7 +21,8 @@ router.get('/publish', requiresLogin, mailboxController.publish);
 router.get('/update/:id', requiresLogin, mailboxController.update);
 router.get('/:id', mailboxController.show);
 
-router.post('/', requiresLogin, mailboxController.create);
+//requiresLogin,upload.single('image')
+router.post('/', mailboxController.create);
 
 router.put('/:id', mailboxController.update);
 
