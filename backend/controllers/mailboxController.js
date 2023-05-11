@@ -1,4 +1,5 @@
 var MailBoxModel = require('../models/mailboxModel.js');
+var HistoryModel = require('../models/historyModel.js');
 
 module.exports = {
     /**
@@ -42,9 +43,22 @@ module.exports = {
                 });
             }
 
-            var data = [];
-            data.mailbox = mailbox;
+            HistoryModel.find({ parentMailBox: id })
+                .populate('parentMailBox')
+                .exec(function(err, histories) {
+                    if (err) {
+                        return res.status(500).json({
+                            message: 'Error when getting histories.',
+                            error: err
+                        });
+                    }
+
+            var data = {
+                mailbox: mailbox,
+                histories: histories,
+            };
             return res.render('mailbox/show', data);
+                });
         });
     },
 

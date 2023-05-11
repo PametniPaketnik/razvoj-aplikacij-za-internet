@@ -16,6 +16,18 @@
         </div>
     </div>
 </div>
+<h1>History</h1>
+{{#each histories}}
+    <div class="col-12 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">MailBox: {{../mailbox.name}}</h3>
+                <p class="card-text">Is successful open: {{isSuccessfulOpen}}</p>
+                <p class="card-text">Date: {{date}}</p>
+            </div>
+        </div>
+    </div>
+{{/each}}
 
 <script>
 
