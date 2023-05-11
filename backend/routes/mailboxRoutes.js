@@ -22,6 +22,6 @@ router.post('/', mailboxController.create);
 
 //router.put('/:id', mailboxController.update);
 
-//router.delete('/delete/:id', mailboxController.remove);
+router.delete('/delete/:id', mailboxController.remove);
 
 module.exports = router;
