@@ -20,9 +20,9 @@
                             {{#if ../session.userId}}
                                 <a href="/mailboxes/update/{{_id}}" class="btn btn-sm btn-primary mr-2">Edit</a>
                             {{/if}}
-                            {{#ifeq ../session.userId.isAdmin true}}
-                                    <button class="btn btn-sm btn-danger" onclick="delet('{{_id}}')">Delete</button>
-                            {{/ifeq}}
+
+                            <button class="btn btn-sm btn-danger" onclick="delet('{{_id}}')">Delete</button>
+
                         </div>
                     </div>
                 </div>
