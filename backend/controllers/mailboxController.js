@@ -1,9 +1,6 @@
 var MailBoxModel = require('../models/mailboxModel.js');
 
-
 module.exports = {
-
-
     /**
      * MailBoxModel.list()
      */
@@ -56,7 +53,6 @@ module.exports = {
      */
     create: function (req, res) {
         var mailbox = new MailBoxModel({
-
             name : req.body.name,
             street : req.body.street,
             postcode : req.body.postcode,
@@ -65,7 +61,6 @@ module.exports = {
             date : new Date(),
             userId : req.session.userId
         });
-
 
         mailbox.save(function (err, mailbox) {
             if (err) {
@@ -144,6 +139,4 @@ module.exports = {
     update: function(req, res){
         return res.render('mailbox/update');
     }
-
-
 };
