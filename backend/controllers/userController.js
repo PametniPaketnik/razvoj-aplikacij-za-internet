@@ -58,7 +58,14 @@ module.exports = {
         var user = new UserModel({
 			username : req.body.username,
 			password : req.body.password,
-			email : req.body.email
+            email : req.body.email,
+			firstname : req.body.firstname,
+            lastName : req.body.lastName,
+            tel : req.body.tel,
+            street : req.body.street,
+            postcode : req.body.postcode,
+            post : req.body.post
+
         });
 
         user.save(function (err, user) {
@@ -97,6 +104,12 @@ module.exports = {
             user.username = req.body.username ? req.body.username : user.username;
 			user.password = req.body.password ? req.body.password : user.password;
 			user.email = req.body.email ? req.body.email : user.email;
+            user.firstName = req.body.firstName ? req.body.firstName : user.firstName;
+            user.lastName = req.body.lastName ? req.body.lastName : user.lastName;
+            user.tel = req.body.tel ? req.body.tel : user.tel;
+            user.street = req.body.street ? req.body.street : user.street;
+            user.postcode = req.body.postcode ? req.body.postcode : user.postcode;
+            user.post = req.body.post ? req.body.post : user.post;
 			
             user.save(function (err, user) {
                 if (err) {
