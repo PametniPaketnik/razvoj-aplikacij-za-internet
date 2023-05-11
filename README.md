@@ -10,6 +10,15 @@ You will need to have these installed:
 - <a href="https://nodejs.org/en">NodeJS</a>
 - <a href="https://react.dev/">ReactJS</a>
 
+# Installation
+
+Install from source
+```bash
+git clone https://github.com/PametniPaketnik/razvoj-aplikacij-za-internet
+cd razvoj-aplikacij-za-internet/backend
+npm install
+```
+
 # Run
 
 Launch backend with:
