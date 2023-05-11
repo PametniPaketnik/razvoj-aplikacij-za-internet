@@ -9,7 +9,13 @@ var userSchema = new Schema({
     'isAdmin' : {
         type: Boolean,
         default: false
-    }
+    },
+	'firstName' : String,
+	'lastName' : String,
+	'tel' : String,
+	'street' : String,
+	'postcode' : Number,
+	'post' : String
 });
 
 userSchema.pre('save', function(next){

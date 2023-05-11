@@ -18,7 +18,7 @@ router.get('/publish', requiresLogin, mailboxController.publish);
 router.get('/update/:id', requiresLogin, mailboxController.update);
 router.get('/:id', mailboxController.show);
 
-router.post('/', requiresLogin, mailboxController.create);
+router.post('/', mailboxController.create);
 
 //router.put('/:id', mailboxController.update);
 
