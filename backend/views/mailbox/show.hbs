@@ -9,10 +9,12 @@
             <p class="card-text">Open: {{mailbox.open}}</p>
             <p class="card-text">Date: {{mailbox.date}}</p>
             <p class="card-text">User: {{mailbox.userId.username}}</p>
-            <div class="d-flex justify-content-end">
-                <a href="/mailboxes/update" class="btn btn-sm btn-primary mr-2">Edit</a>
-                <button class="btn btn-sm btn-danger" onclick="delet('{{_id}}')">Delete</button>
-            </div>
+            {{#ifeq mailbox.userId.isAdmin true}}
+                <div class="d-flex justify-content-end">
+                    <a href="/mailboxes/update" class="btn btn-sm btn-primary mr-2">Edit</a>
+                    <button class="btn btn-sm btn-danger" onclick="delet('{{_id}}')">{{mailbox.userId}}</button>
+                </div>
+            {{/ifeq}}
         </div>
     </div>
 </div>

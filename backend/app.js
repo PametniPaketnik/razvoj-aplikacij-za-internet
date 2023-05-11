@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var hbs = require('hbs');
 
 // vključimo mongoose in ga povežemo z MongoDB
 var mongoose = require('mongoose');
@@ -14,7 +15,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // vključimo routerje
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/userRoutes');
+var usersRouter = require('./routes/userRoutes')
+var adminRouter = require('./routes/adminRoutes');
 var mailboxesRouter = require('./routes/mailboxRoutes');
 
 var app = express();
@@ -51,6 +53,7 @@ app.use(function (req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/admin', adminRouter);
 app.use('/mailboxes', mailboxesRouter);
 
 // catch 404 and forward to error handler
@@ -67,6 +70,16 @@ app.use(function(err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     res.render('error');
+});
+
+hbs.registerHelper('ifeq', function (a, b, options) {
+    if (a == b) { return options.fn(this); }
+    return options.inverse(this);
+});
+
+hbs.registerHelper('ifnoteq', function (a, b, options) {
+    if (a != b) { return options.fn(this); }
+    return options.inverse(this);
 });
 
 module.exports = app;

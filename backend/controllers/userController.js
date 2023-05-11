@@ -6,7 +6,6 @@ var UserModel = require('../models/userModel.js');
  * @description :: Server-side logic for managing users.
  */
 module.exports = {
-
     /**
      * userController.list()
      */

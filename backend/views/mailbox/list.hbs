@@ -1,6 +1,8 @@
 <div class="container">
     <h1 class="mt-4">Mailboxes:</h1>
-    <a href="/mailboxes/publish" class="btn btn-primary mb-3">ADD MAILBOX</a>
+    {{#if ../session.userId}}
+        <a href="/mailboxes/publish" class="btn btn-primary mb-3">ADD MAILBOX</a>
+    {{/if}}
     <div class="row">
         {{#each mailboxes}}
             <div class="col-12 mb-3">
@@ -15,8 +17,12 @@
                         <p class="card-text">User: {{userId.username}}</p>
                         <div class="d-flex justify-content-end">
                             <a href="/mailboxes/{{_id}}" class="btn btn-sm btn-primary mr-2">More Info</a>
-                            <a href="/mailboxes/update/{{_id}}" class="btn btn-sm btn-primary mr-2">Edit</a>
-                            <button class="btn btn-sm btn-danger" onclick="delet('{{_id}}')">Delete</button>
+                            {{#if ../session.userId}}
+                                <a href="/mailboxes/update/{{_id}}" class="btn btn-sm btn-primary mr-2">Edit</a>
+                            {{/if}}
+                            {{#ifeq ../session.userId.isAdmin true}}
+                                    <button class="btn btn-sm btn-danger" onclick="delet('{{_id}}')">Delete</button>
+                            {{/ifeq}}
                         </div>
                     </div>
                 </div>

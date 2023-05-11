@@ -5,7 +5,7 @@ var mailboxController = require('../controllers/mailboxController.js');
 router.get('/', mailboxController.list);
 /* GET home page. */
 /*router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express' });
 });*/
 
 module.exports = router;
