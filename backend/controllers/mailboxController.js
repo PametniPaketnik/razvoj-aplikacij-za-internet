@@ -20,7 +20,6 @@ module.exports = {
             return res.render('mailbox/list', data);
         });
     },
-
     /**
      * MailBoxModel.show()
      */

@@ -6,13 +6,16 @@ var userSchema = new Schema({
 	'username' : String,
 	'password' : String,
 	'email' : String,
+    'isAdmin' : {
+        type: Boolean,
+        default: false
+    },
 	'firstName' : String,
 	'lastName' : String,
 	'tel' : String,
 	'street' : String,
 	'postcode' : Number,
-	'post' : String,
-
+	'post' : String
 });
 
 userSchema.pre('save', function(next){
