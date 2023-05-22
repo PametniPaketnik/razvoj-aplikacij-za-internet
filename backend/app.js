@@ -7,7 +7,8 @@ var hbs = require('hbs');
 
 // vključimo mongoose in ga povežemo z MongoDB
 var mongoose = require('mongoose');
-var mongoDB = "mongodb://127.0.0.1/paketnik";
+var mongoDB = "mongodb+srv://sabinapa:sabinapa@cluster0.kqf11jz.mongodb.net/paketnik";
+//var mongoDB = "mongodb://127.0.0.1/paketnik";
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
