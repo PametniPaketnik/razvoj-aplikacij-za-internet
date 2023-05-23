@@ -6,7 +6,6 @@ module.exports = {
      * MailBoxModel.list()
      */
     list: function (req, res) {
-        console.log("ajhaks");
         MailBoxModel.find()
             .populate('userId')
             .exec(function (err, mailboxes) {
