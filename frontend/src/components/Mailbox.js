@@ -1,4 +1,6 @@
 import {Link} from "react-router-dom";
+import DeleteButton from "./DeleteButton";
+import {useState} from "react";
 
 function Mailbox(props){
     const mailboxId = props.mailbox._id;
@@ -16,6 +18,13 @@ function Mailbox(props){
             <Link to={`/mailboxes/${mailboxId}`}>
                 <button>Preberi več</button>
             </Link>
+
+            <DeleteButton
+                id={props.mailbox._id}
+                text="Delete mailbox"
+            />
+
+
         </div>
     );
 }
