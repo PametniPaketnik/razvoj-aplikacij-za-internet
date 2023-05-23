@@ -144,7 +144,16 @@ module.exports = {
                 });
             }
 
-            return res.status(204).json();
+            HistoryModel.deleteMany({ parentMailBox: id}, function (err) {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'Error when deleting histories for the mailbox.',
+                        error: err
+                    });
+                }
+
+                return res.status(204).json();
+            });
         });
     },
 
