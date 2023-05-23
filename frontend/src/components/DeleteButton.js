@@ -1,3 +1,4 @@
+import './styles/Mailbox.css';
 async function handleDeleteClick(props) {
     console.log(props.id) //comment id
 
@@ -28,7 +29,7 @@ async function handleDeleteClick(props) {
 function DeleteButton(props) {
 
     return (
-        <button type="button" className="btn btn-danger" onClick={() => handleDeleteClick(props)}>
+        <button className="delete-button" type="button" onClick={() => handleDeleteClick(props)}>
             {props.text}
         </button>
     )
