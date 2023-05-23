@@ -59,6 +59,7 @@ module.exports = {
             tel : req.body.tel,
             street : req.body.street,
             postcode : req.body.postcode,
+            path : "/images/"+req.file.filename,
         });
 
         user.save(function (err, user) {
@@ -103,6 +104,7 @@ module.exports = {
             user.street = req.body.street ? req.body.street : user.street;
             user.postcode = req.body.postcode ? req.body.postcode : user.postcode;
             user.post = req.body.post ? req.body.post : user.post;
+            user.path = req.body.path ? req.body.path : user.path;
 			
             user.save(function (err, user) {
                 if (err) {

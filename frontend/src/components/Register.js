@@ -10,33 +10,35 @@ function Register() {
     const [street, setStreet] = useState([]);
     const [postcode, setPostcode] = useState([]);
     const [error, setError] = useState([]);
+    const[file, setFile] = useState('');
 
-    async function Register(e){
+    async function Register(e) {
         e.preventDefault();
-        const res = await fetch("http://localhost:3001/users", {
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('username', username);
+        formData.append('password', password);
+        formData.append('firstname', firstname);
+        formData.append('lastname', lastname);
+        formData.append('tel', tel);
+        formData.append('street', street);
+        formData.append('postcode', postcode);
+        formData.append('image', file);
+
+        const res = await fetch('http://localhost:3001/users', {
             method: 'POST',
             credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: email,
-                username: username,
-                password: password,
-                firstname: firstname,
-                lastname: lastname,
-                tel: tel,
-                street: street,
-                postcode: postcode
-            })
+            body: formData,
         });
+
         const data = await res.json();
-        if(data._id !== undefined){
-            window.location.href="/";
-        }
-        else{
-            setUsername("");
-            setPassword("");
-            setEmail("");
-            setError("Registration failed");
+        if (data._id !== undefined) {
+            window.location.href = '/';
+        } else {
+            setUsername('');
+            setPassword('');
+            setEmail('');
+            setError('Registration failed');
         }
     }
 
@@ -50,6 +52,8 @@ function Register() {
             <input type="text" name="tel" placeholder="Phone Number" value={tel} onChange={(e)=>(setTel(e.target.value))} />
             <input type="text" name="street" placeholder="Street" value={street} onChange={(e)=>(setStreet(e.target.value))} />
             <input type="number" name="postcode" placeholder="Postcode" value={postcode} onChange={(e)=>(setPostcode(e.target.value))} />
+            <label>Chose Image</label>
+            <input type="file" id="file" onChange={(e)=>{setFile(e.target.files[0])}}/>
             <input type="submit" name="submit" value="Login" />
             <label>{error}</label>
 
