@@ -14,4 +14,6 @@ function requiresLogin(req, res, next){
 
 router.get('/', historyController.list);
 
+router.get('/byParentMailbox/:id', historyController.showByParentMailbox);
+
 module.exports = router;
