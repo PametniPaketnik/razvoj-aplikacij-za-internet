@@ -21,6 +21,7 @@ function Profile(){
             <h1>User profile</h1>
             <p>Username: {profile.username}</p>
             <p>Email: {profile.email}</p>
+            <img src={"http://localhost:3001/"+profile.path} alt={profile.username}/>
         </>
     );
 }
