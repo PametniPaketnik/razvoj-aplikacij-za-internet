@@ -17,4 +17,25 @@ module.exports = {
                 return res.json(histories);
             });
     },
+
+    showByParentMailbox: function (req, res) {
+        var id = req.params.id;
+
+        HistoryModel.find({parentMailBox: id}, function (err, mailbox) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when getting mailbox.',
+                    error: err
+                });
+            }
+
+            if (!mailbox) {
+                return res.status(404).json({
+                    message: 'No such mailbox'
+                });
+            }
+
+            return res.json(mailbox);
+        });
+    },
 };

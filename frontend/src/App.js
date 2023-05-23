@@ -8,6 +8,8 @@ import Register from "./components/Register";
 import Profile from "./components/Profile";
 import Logout from "./components/Logout";
 import AddMailbox from "./components/AddMailbox";
+import ShowMailbox from "./components/ShowMailbox";
+import Histories from "./components/Histories";
 
 function App() {
   /**
@@ -53,6 +55,8 @@ function App() {
             <Route path="/publish" element={<AddMailbox />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/logout" element={<Logout />}></Route>
+            <Route path="/mailboxes/:id" element={<ShowMailbox />} />
+            <Route path="/histories" element={<Histories />} />
           </Routes>
         </div>
       </UserContext.Provider>
