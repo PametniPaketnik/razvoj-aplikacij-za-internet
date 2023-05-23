@@ -1,33 +1,37 @@
 import { useContext } from "react";
 import { UserContext } from "../userContext";
 import { Link } from "react-router-dom";
+import './styles/Header.css';
 
 function Header(props) {
     return (
         <header>
-            <h1>{props.title}</h1>
-            <nav>
-                <ul>
-                    <li><Link to='/'>Home</Link></li>
+            <div className="maindiv">
+                <div className={"title"}>
+                    <h1>{props.title}</h1>
+                </div>
+                <div className="othersdiv">
+                    <Link to='/' className="nav-link">Home</Link>
+                    <Link to='/publish' className="nav-link">Publish</Link>
+                    <Link to='/profile' className="nav-link">Profile</Link>
+                </div>
+                <div className="logdiv">
                     <UserContext.Consumer>
                         {context => (
                             context.user ?
-                                <>
-                                    <li><Link to='/publish'>Publish</Link></li>
-                                    <li><Link to='/profile'>Profile</Link></li>
-                                    <li><Link to='/logout'>Logout</Link></li>
-                                </>
-                            :
-                                <>
-                                    <li><Link to='/login'>Login</Link></li>
-                                    <li><Link to='/register'>Register</Link></li>
-                                </>
-
+                                <div>
+                                    <Link to='/logout' className="nav-link">Logout</Link>
+                                </div>
+                                :
+                                <div className="login-register">
+                                    <Link to='/login' className="nav-link">Login</Link>
+                                    <Link to='/register' className="nav-link">Register</Link>
+                                </div>
                         )}
                     </UserContext.Consumer>
-                </ul>
-            </nav>
-        </header >
+                </div>
+            </div>
+        </header>
     );
 }
 

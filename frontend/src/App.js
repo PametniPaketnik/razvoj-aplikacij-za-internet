@@ -47,7 +47,7 @@ function App() {
         setUserContext: updateUserData
       }}>
         <div className="App">
-          <Header title="My application"></Header>
+          <Header title="PAMETNI PAKETNIK"></Header>
           <Routes>
             <Route path="/" exact element={<Mailboxes />}></Route>
             <Route path="/login" exact element={<Login />}></Route>
