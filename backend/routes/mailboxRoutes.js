@@ -1,4 +1,8 @@
 var express = require('express');
+
+var multer = require('multer');
+var upload = multer({dest: 'public/mailboxes/'});
+
 var router = express.Router();
 var mailboxController = require('../controllers/mailboxController.js');
 
@@ -18,7 +22,7 @@ router.get('/', mailboxController.list);
 router.get('/update/:id', requiresLogin, mailboxController.update);
 router.get('/:id', mailboxController.show);
 
-router.post('/', mailboxController.create);
+router.post('/', upload.single('image'), mailboxController.create);
 
 //router.put('/:id', mailboxController.update);
 
