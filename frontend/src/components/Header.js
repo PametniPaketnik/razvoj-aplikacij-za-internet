@@ -19,6 +19,7 @@ function Header(props) {
                                     <Link to='/publish' className="nav-link">Publish</Link>
                                     <Link to='/profile' className="nav-link">Profile</Link>
                                     <Link to={`/mymailbox/${context.user._id}`} className="nav-link">My mailbox</Link>
+                                    {context.user.isAdmin && <Link to="/" className="nav-link">Admin</Link>}
                                 </>
                             ) : null
                         )}
