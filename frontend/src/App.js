@@ -10,6 +10,7 @@ import Logout from "./components/Logout";
 import AddMailbox from "./components/AddMailbox";
 import ShowMailbox from "./components/ShowMailbox";
 import Histories from "./components/Histories";
+import MyMailbox from "./components/MyMailbox";
 
 function App() {
   /**
@@ -57,6 +58,7 @@ function App() {
             <Route path="/logout" element={<Logout />}></Route>
             <Route path="/mailboxes/:id" element={<ShowMailbox />} />
             <Route path="/histories" element={<Histories />} />
+            <Route path="/mymailbox/:userId" element={<MyMailbox />} />
           </Routes>
         </div>
       </UserContext.Provider>

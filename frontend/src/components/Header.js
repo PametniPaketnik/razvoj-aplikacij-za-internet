@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import { UserContext } from "../userContext";
-import { Link } from "react-router-dom";
+import {useContext} from "react";
+import {UserContext} from "../userContext";
+import {Link} from "react-router-dom";
 import './styles/Header.css';
 
 function Header(props) {
@@ -12,9 +12,20 @@ function Header(props) {
                 </div>
                 <div className="othersdiv">
                     <Link to='/' className="nav-link">Home</Link>
-                    <Link to='/publish' className="nav-link">Publish</Link>
-                    <Link to='/profile' className="nav-link">Profile</Link>
+                    <UserContext.Consumer>
+                        {context => (
+                            context.user ? (
+                                <>
+                                    <Link to='/publish' className="nav-link">Publish</Link>
+                                    <Link to='/profile' className="nav-link">Profile</Link>
+                                    <Link to={`/mymailbox/${context.user._id}`} className="nav-link">My mailbox</Link>
+                                </>
+                            ) : null
+                        )}
+                    </UserContext.Consumer>
                 </div>
+
+
                 <div className="logdiv">
                     <UserContext.Consumer>
                         {context => (
