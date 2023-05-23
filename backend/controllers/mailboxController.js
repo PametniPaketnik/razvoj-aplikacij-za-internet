@@ -17,7 +17,8 @@ module.exports = {
             }
             var data = [];
             data.mailboxes = mailboxes;
-            return res.render('mailbox/list', data);
+            //return res.render('mailbox/list', data);
+            return res.json(mailboxes);
         });
     },
     /**
@@ -56,8 +57,9 @@ module.exports = {
                 mailbox: mailbox,
                 histories: histories,
             };
-            return res.render('mailbox/show', data);
-                });
+            //return res.render('mailbox/show', data);
+            return res.json(mailbox);
+            });
         });
     },
 
@@ -82,7 +84,8 @@ module.exports = {
                     error: err
                 });
             }
-            return res.redirect('/mailboxes');
+            //return res.redirect('/mailboxes');
+            return res.status(201).json(mailbox);
         });
     },
 

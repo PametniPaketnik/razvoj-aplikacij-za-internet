@@ -50,16 +50,12 @@ module.exports = {
      * userController.create()
      */
     create: function (req, res) {
-        if(req.body.password !== req.body.retype_password) {
-            return res.redirect('/error');
-        }
-
         var user = new UserModel({
 			username : req.body.username,
 			password : req.body.password,
             email : req.body.email,
-			firstname : req.body.firstname,
-            lastName : req.body.lastName,
+			firstName : req.body.firstname,
+            lastName : req.body.lastname,
             tel : req.body.tel,
             street : req.body.street,
             postcode : req.body.postcode,
@@ -73,8 +69,8 @@ module.exports = {
                 });
             }
 
-            //return res.status(201).json(user);
-            return res.redirect('/users/login');
+            return res.status(201).json(user);
+            //return res.redirect('/users/login');
         });
     },
 
@@ -155,7 +151,8 @@ module.exports = {
                 return next(err);
             }
             req.session.userId = user._id;
-            res.redirect('/users/profile');
+            //res.redirect('/users/profile');
+            return res.json(user);
         });
     },
 
@@ -170,7 +167,8 @@ module.exports = {
                     err.status = 400;
                     return next(err);
                 } else{
-                    return res.render('user/profile', user);
+                    //return res.render('user/profile', user);
+                    return res.json(user);
                 }
             }
         });  
@@ -182,7 +180,8 @@ module.exports = {
                 if(err){
                     return next(err);
                 } else{
-                    return res.redirect('/');
+                    //return res.redirect('/');
+                    return res.status(201).json({});
                 }
             });
         }
