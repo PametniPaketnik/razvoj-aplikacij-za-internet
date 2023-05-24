@@ -51,6 +51,7 @@ function App() {
           <Header title="PAMETNI PAKETNIK"></Header>
           <Routes>
             <Route path="/" exact element={<Mailboxes />}></Route>
+            <Route path="/admin" exact element={<Mailboxes />}></Route>
             <Route path="/login" exact element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/publish" element={<AddMailbox />}></Route>
