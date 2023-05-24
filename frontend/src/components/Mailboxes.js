@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 
 function Mailboxes(){
     const [mailboxes, setMailboxes] = useState([]);
+    const isAdminSite = window.location.pathname === "/admin";
     useEffect(function(){
         const getMailboxes = async function(){
             const res = await fetch("http://localhost:3001");
@@ -16,7 +17,9 @@ function Mailboxes(){
     return(
         <div>
             <h3>Mailboxes:</h3>
-            <Link to='/publish' className="nav-link">Add mailbox</Link>
+            {isAdminSite && (
+                <Link to='/publish' className="nav-link">Add mailbox</Link>
+            )}
             <ul>
                 {mailboxes.map(mailbox=>(<Mailbox mailbox={mailbox} key={mailbox._id}></Mailbox>))}
             </ul>
