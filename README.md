@@ -32,3 +32,9 @@ Or if you have <a href="https://www.npmjs.com/package/nodemon">nodemon</a> insta
 cd backend
 npm run dev
 ```
+
+Launch frontend with:
+```bash
+cd frontend
+npm run start
+```
