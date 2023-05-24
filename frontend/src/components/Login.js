@@ -40,7 +40,7 @@ function Login(){
                 <div className="login-form">
                     <div className="login-title">
                         <h2>Welcome!</h2>
-                        <h3>Sign in to your Account</h3>
+                        <h3>Sign IN to your Account</h3>
                     </div>
                     <div className="login-formform">
                     <form onSubmit={Login}>
