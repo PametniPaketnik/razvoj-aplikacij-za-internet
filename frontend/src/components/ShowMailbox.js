@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
 import Histories from "./Histories";
+import Map from "./Map";
 import './styles/ShowMailbox.css';
 
 function ShowPhoto() {
@@ -51,6 +53,7 @@ function ShowPhoto() {
                         <p className="mailbox-info">Added: {mailbox.userId.username}</p>
                     </div>
                     <Histories histories={histories} />
+                    <Map />
                 </div>
 
             ) : (
