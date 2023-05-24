@@ -1,8 +1,6 @@
 import {Link} from "react-router-dom";
 import DeleteButton from "./DeleteButton";
-import {useState} from "react";
 import './styles/Mailbox.css';
-import {UserContext} from "../userContext";
 
 function Mailbox(props) {
     const mailboxId = props.mailbox._id;
@@ -16,7 +14,7 @@ function Mailbox(props) {
                     <table className="mailbox-table">
                         <tbody>
                         <tr>
-                            <th>ID</th>
+                            <th>Box ID</th>
                             <th>Location</th>
                             <th>Open</th>
                             {isAdminSite && (
@@ -56,7 +54,7 @@ function Mailbox(props) {
             )}
             {isNotAdminSite && (
                 <div className="mailbox-container">
-                    <h5 className="mailbox-name">ID: {props.mailbox.name}</h5>
+                    <h5 className="mailbox-name">Box ID: {props.mailbox.name}</h5>
                     <div className="mailbox-box">
                         <div className="mailbox-image"></div>
                         <p className="mailbox-info">
