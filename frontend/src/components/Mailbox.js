@@ -4,34 +4,71 @@ import {useState} from "react";
 import './styles/Mailbox.css';
 import {UserContext} from "../userContext";
 
-function Mailbox(props){
+function Mailbox(props) {
     const mailboxId = props.mailbox._id;
     const isAdminSite = window.location.pathname === "/admin";
+    const isNotAdminSite = window.location.pathname !== "/admin";
 
     return (
-        <div className="mailbox-container">
-            <h5 className="mailbox-name">ID: {props.mailbox.name}</h5>
-            <p className="mailbox-info">Street: {props.mailbox.street}</p>
-            <p className="mailbox-info">Postcode: {props.mailbox.postcode}</p>
-            <p className="mailbox-info">Post: {props.mailbox.post}</p>
-            <p className="mailbox-info">Open: {props.mailbox.open.toString()}</p>
-            <p className="mailbox-info">Date: {props.mailbox.date}</p>
-            <p className="mailbox-info">Added: {props.mailbox.userId.username}</p>
-
+        <div>
             {isAdminSite && (
-                <Link to={`/mailboxes/${mailboxId}`} className="mailbox-link">
-                    More info
-                </Link>
+                <div className="mailbox-container-admin">
+                    <table className="mailbox-table">
+                        <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>Location</th>
+                            <th>Open</th>
+                            {isAdminSite && (
+                                <>
+                                    <th>Read More</th>
+                                    <th>Delete</th>
+                                </>
+                            )}
+                        </tr>
+                        <tr>
+                            <td>{props.mailbox.name}</td>
+                            <td>
+                                <div className="mailbox-box">
+                                    <div className="mailbox-image"></div>
+                                    <p className="mailbox-info">
+                                        {props.mailbox.street}, {props.mailbox.postcode}, {props.mailbox.post}
+                                    </p>
+                                </div>
+                            </td>
+                            <td>{props.mailbox.open.toString()}</td>
+                            {isAdminSite && (
+                                <>
+                                    <td>
+                                        <Link to={`/mailboxes/${mailboxId}`} className="mailbox-link">
+                                            More info
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <DeleteButton id={props.mailbox._id} text="Delete mailbox" />
+                                    </td>
+                                </>
+                            )}
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             )}
-
-            {isAdminSite && (
-                <DeleteButton
-                    id={props.mailbox._id}
-                    text="Delete mailbox"
-                />
+            {isNotAdminSite && (
+                <div className="mailbox-container">
+                    <h5 className="mailbox-name">ID: {props.mailbox.name}</h5>
+                    <div className="mailbox-box">
+                        <div className="mailbox-image"></div>
+                        <p className="mailbox-info">
+                            {props.mailbox.street}, {props.mailbox.postcode}, {props.mailbox.post}
+                        </p>
+                    </div>
+                    <p className="mailbox-info">Open: {props.mailbox.open.toString()}</p>
+                </div>
             )}
         </div>
     );
 }
+
 
 export default Mailbox;
