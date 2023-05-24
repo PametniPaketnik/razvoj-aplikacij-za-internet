@@ -11,6 +11,7 @@ import AddMailbox from "./components/AddMailbox";
 import ShowMailbox from "./components/ShowMailbox";
 import Histories from "./components/Histories";
 import MyMailbox from "./components/MyMailbox";
+import Home from "./components/Home";
 
 function App() {
   /**
@@ -50,7 +51,7 @@ function App() {
         <div className="App">
           <Header title="PAMETNI PAKETNIK"></Header>
           <Routes>
-            <Route path="/" exact element={<Mailboxes />}></Route>
+            <Route path="/" exact element={<Home />}></Route>
             <Route path="/admin" exact element={<Mailboxes />}></Route>
             <Route path="/login" exact element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
