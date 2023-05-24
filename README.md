@@ -15,8 +15,8 @@ You will need to have these installed:
 Install from source
 ```bash
 git clone https://github.com/PametniPaketnik/razvoj-aplikacij-za-internet
-cd razvoj-aplikacij-za-internet/backend
-npm install
+npm install backend/
+npm install frontend/
 ```
 
 # Run
