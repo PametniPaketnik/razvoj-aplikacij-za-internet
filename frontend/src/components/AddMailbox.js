@@ -4,7 +4,7 @@ import { UserContext } from '../userContext';
 
 function AddMailbox(props) {
     const userContext = useContext(UserContext);
-    const[name, setName] = useState('');
+    const[boxID, setBoxID] = useState('');
     const[street, setStreet] = useState('');
     const[postcode, setPostcode] = useState('');
     const[post, setPost] = useState('');
@@ -14,13 +14,13 @@ function AddMailbox(props) {
     async function onSubmit(e){
         e.preventDefault();
 
-        if(!name){
-            alert("Vnesite ime!");
+        if(!boxID){
+            alert("Vnesite boxID!");
             return;
         }
 
         const formData = new FormData();
-        formData.append('name', name);
+        formData.append('boxID', boxID);
         formData.append('street', street);
         formData.append('postcode', postcode);
         formData.append('post', post);
@@ -39,7 +39,7 @@ function AddMailbox(props) {
         <form className="form-group" onSubmit={onSubmit}>
             {!userContext.user ? <Navigate replace to="/login" /> : ""}
             {uploaded ? <Navigate replace to="/" /> : ""}
-            <input type="text" className="form-control" name="name" placeholder="Name" value={name} onChange={(e)=>{setName(e.target.value)}}/>
+            <input type="text" className="form-control" name="boxID" placeholder="BoxID" value={boxID} onChange={(e)=>{setBoxID(e.target.value)}}/>
             <input type="text" className="form-control" name="street" placeholder="Street" value={street} onChange={(e)=>{setStreet(e.target.value)}}/>
             <input type="text" className="form-control" name="postcode" placeholder="Postcode" value={postcode} onChange={(e)=>{setPostcode(e.target.value)}}/>
             <input type="text" className="form-control" name="post" placeholder="Post" value={post} onChange={(e)=>{setPost(e.target.value)}}/>

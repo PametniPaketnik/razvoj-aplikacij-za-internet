@@ -1,11 +1,30 @@
 import {Link} from "react-router-dom";
-import DeleteButton from "./DeleteButton";
 import './styles/Mailbox.css';
 
 function Mailbox(props) {
     const mailboxId = props.mailbox._id;
     const isAdminSite = window.location.pathname === "/admin";
     const isNotAdminSite = window.location.pathname !== "/admin";
+
+    async function onDelete(e){
+        e.preventDefault();
+
+        const res = await fetch(`http://localhost:3001/mailboxes/delete/${props.mailbox._id}`, {
+            method: 'DELETE',
+            credentials: 'include',
+        });
+
+        console.log(props.mailbox._id)
+
+        if (res.status === 204) {
+            // The response is empty
+            props.onMailboxDeleted();
+        } else {
+            // The response is not empty, parse it as JSON
+            const data = await res.json();
+            props.onMailboxDeleted();
+        }
+    }
 
     return (
         <div>
@@ -25,7 +44,7 @@ function Mailbox(props) {
                             )}
                         </tr>
                         <tr>
-                            <td>{props.mailbox.name}</td>
+                            <td>{props.mailbox.boxID}</td>
                             <td>
                                 <div className="mailbox-box">
                                     <div className="mailbox-image"></div>
@@ -43,7 +62,9 @@ function Mailbox(props) {
                                         </Link>
                                     </td>
                                     <td>
-                                        <DeleteButton id={props.mailbox._id} text="Delete mailbox" />
+                                        <button className="delete-button" type="button" value="Briši" onClick={onDelete}>
+                                            Delete mailbox
+                                        </button>
                                     </td>
                                 </>
                             )}
@@ -54,7 +75,7 @@ function Mailbox(props) {
             )}
             {isNotAdminSite && (
                 <div className="mailbox-container">
-                    <h5 className="mailbox-name">Box ID: {props.mailbox.name}</h5>
+                    <h5 className="mailbox-name">Box ID: {props.mailbox.boxID}</h5>
                     <div className="mailbox-box">
                         <div className="mailbox-image"></div>
                         <p className="mailbox-info">

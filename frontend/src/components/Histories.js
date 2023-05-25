@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import History from "./History";
 import {useParams} from "react-router-dom";
 
-function Comments(){
+function Histories({ mailboxId }){
     const { id } = useParams();
     const [histories, setHistories] = useState([]);
     useEffect(function(){
@@ -20,6 +20,7 @@ function Comments(){
             <ul>
                 {histories.map((history) => (
                     <History history={history}
+                             boxId={mailboxId}
                              key={history._id}
                     />
                 ))}
@@ -28,4 +29,4 @@ function Comments(){
     );
 }
 
-export default Comments;
+export default Histories;
