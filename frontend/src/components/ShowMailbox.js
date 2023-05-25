@@ -45,7 +45,7 @@ function ShowMailbox() {
                             <div className="mailbox-box">
                                 <div className="mailbox-image"></div>
                                 <p className="mailbox-info">
-                                    {mailbox.street}, {mailbox.postcode}, {mailbox.post}
+                                    {mailbox.street}, {mailbox.postcode}, {mailbox.post}, {mailbox.country}
                                 </p>
                             </div>
                             <p className="mailbox-info">Open: {mailbox.open.toString()}</p>
@@ -59,11 +59,10 @@ function ShowMailbox() {
                     </div>
                     <div className="right-container">
                         <div className="map-container">
-                            <Map street={mailbox.street} postcode={mailbox.postcode} city={mailbox.post} country={"Slovenia"}/>
+                            <Map lat={mailbox.lat} lng={mailbox.lng}/>
                         </div>
                     </div>
                 </div>
-
             ) : (
                 <p>Loading mailbox...</p>
             )}

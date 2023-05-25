@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import Mailbox from './Mailbox';
-import {Link} from "react-router-dom";
+import MapMarker from './MapMarker';
+import { Link } from "react-router-dom";
 
 function Mailboxes(){
     const [mailboxes, setMailboxes] = useState([]);
     const isAdminSite = window.location.pathname === "/admin";
+    const location = [46.5547, 15.6459];
+
     useEffect(function(){
         const getMailboxes = async function(){
             const res = await fetch("http://localhost:3001");
@@ -36,6 +40,13 @@ function Mailboxes(){
                     }}
                 ></Mailbox>))}
             </ul>
+            <MapContainer center={location} zoom={13} scrollWheelZoom={false} style={{ height: '80vh', width: '80%' }}>
+                <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                { mailboxes.map(mailbox=>(<MapMarker lng={mailbox.lng} lat={mailbox.lat} ></MapMarker>)) }
+            </MapContainer>
         </div>
     );
 }
