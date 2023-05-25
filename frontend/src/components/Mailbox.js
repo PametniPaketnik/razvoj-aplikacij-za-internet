@@ -63,7 +63,6 @@ function Mailbox(props) {
                                     </td>
                                     <td>
                                         <button className="delete-button" type="button" value="Briši" onClick={onDelete}>
-                                            Delete mailbox
                                         </button>
                                     </td>
                                 </>

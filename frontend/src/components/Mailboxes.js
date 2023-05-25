@@ -16,9 +16,11 @@ function Mailboxes(){
 
     return(
         <div>
-            <h3>Mailboxes:</h3>
+            <h3 className="heading">ALL MAILBOXES</h3>
             {isAdminSite && (
-                <Link to='/publish' className="mailbox-add">Add mailbox</Link>
+                <div className="centered-add">
+                <Link to='/publish' className="mailbox-add"></Link>
+                </div>
             )}
             <ul>
                 {mailboxes.map(mailbox=>(<Mailbox
