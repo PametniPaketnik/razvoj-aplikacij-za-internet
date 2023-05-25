@@ -21,6 +21,7 @@ router.get('/', mailboxController.list);
 //router.get('/publish', requiresLogin, mailboxController.publish);
 router.get('/update/:id', requiresLogin, mailboxController.update);
 router.get('/:id', mailboxController.show);
+router.get('/showByMailboxUser/:id', mailboxController.showByMailboxUser);
 
 router.post('/', upload.single('image'), mailboxController.create);
 

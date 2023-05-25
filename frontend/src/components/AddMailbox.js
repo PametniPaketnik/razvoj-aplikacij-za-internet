@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import {useContext, useEffect, useState} from 'react'
 import { Navigate } from 'react-router';
 import { UserContext } from '../userContext';
 import './styles/AddMailbox.css';
@@ -10,13 +10,33 @@ function AddMailbox(props) {
     const[postcode, setPostcode] = useState('');
     const[post, setPost] = useState('');
     const[open, setOpen] = useState('');
+    const[mailboxUser, setMailboxUser] = useState('');
+    const [users, setUsers] = useState([]);
     const[uploaded, setUploaded] = useState(false);
 
-    async function onSubmit(e){
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch(`http://localhost:3001/users`);
+                const data = await response.json();
+                setUsers(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchUsers();
+    }, []);
+
+    async function onSubmit(e) {
         e.preventDefault();
 
-        if(!boxID){
+        if (!boxID) {
             alert("Vnesite boxID!");
+            return;
+        }
+
+        if (!mailboxUser) {
+            alert("Invalid user selected");
             return;
         }
 
@@ -26,6 +46,8 @@ function AddMailbox(props) {
         formData.append('postcode', postcode);
         formData.append('post', post);
         formData.append('open', open);
+        formData.append('mailboxUser', mailboxUser); // Send the selected userId
+
         const res = await fetch('http://localhost:3001/mailboxes', {
             method: 'POST',
             credentials: 'include',
@@ -93,6 +115,24 @@ function AddMailbox(props) {
                     value={open}
                     onChange={(e) => { setOpen(e.target.value) }}
                 />
+            </div>
+            <div className="mb-3">
+                <select
+                    className="form-select"
+                    name="mailboxUser"
+                    value={mailboxUser}
+                    onChange={(e) => {
+                        const selectedUserId = e.target.value;
+                        setMailboxUser(selectedUserId);
+                    }}
+                >
+                    <option value="">assign to the user</option>
+                    {users.map((user) => (
+                        <option key={user._id} value={user._id}>
+                            {user.username}
+                        </option>
+                    ))}
+                </select>
             </div>
             <div className="mb-3 text-center">
                 <input className="btn btn-primary" type="submit" name="submit" value="Add" />

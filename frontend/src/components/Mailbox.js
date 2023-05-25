@@ -82,6 +82,11 @@ function Mailbox(props) {
                         </p>
                     </div>
                     <p className="mailbox-info">Open: {props.mailbox.open.toString()}</p>
+                    <p className="mailbox-info">Assign to: {props.mailbox.mailboxUser.username}</p>
+
+                    <Link to={`/mailboxes/${mailboxId}`} className="mailbox-link">
+                        More info
+                    </Link>
                 </div>
             )}
         </div>

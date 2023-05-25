@@ -12,6 +12,11 @@ var mailBoxSchema = new Schema({
     {
         type: Schema.Types.ObjectId,
         ref : 'user'
+    },
+    'mailboxUser' :
+    {
+        type: Schema.Types.ObjectId,
+        ref : 'user'
     }
 
 });
