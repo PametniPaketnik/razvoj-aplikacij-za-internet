@@ -3,7 +3,7 @@ var Schema   = mongoose.Schema;
 
 var historySchema = new Schema({
     'parentMailBox' : String,
-    'isSuccessfulOpen' : Boolean,
+    'open' : String,
     'date' : Date,
 });
 

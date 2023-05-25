@@ -1,10 +1,11 @@
-function Comment(props) {
+function History(props) {
     return (
             <div>
-                <h5>ID: {props.history._id}</h5>
+                <h5>Box ID: {props.boxId}</h5>
                 <p>Posted date: {props.history.date}</p>
+                <p>Open: {props.history.open}</p>
             </div>
     );
 }
 
-export default Comment;
+export default History;

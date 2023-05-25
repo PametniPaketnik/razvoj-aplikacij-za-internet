@@ -68,7 +68,7 @@ module.exports = {
      */
     create: function (req, res) {
         var mailbox = new MailBoxModel({
-            name : req.body.name,
+            boxID : req.body.boxID,
             street : req.body.street,
             postcode : req.body.postcode,
             post : req.body.post,
@@ -109,7 +109,7 @@ module.exports = {
                 });
             }
 
-            mailbox.name = req.body.name ? req.body.name : mailbox.name;
+            mailbox.boxID = req.body.boxID ? req.body.boxID : mailbox.boxID;
             mailbox.street = req.body.street ? req.body.street : mailbox.street;
             mailbox.postcode = req.body.postcode ? req.body.postcode : mailbox.postcode;
             mailbox.post = req.body.post ? req.body.post : mailbox.post;
