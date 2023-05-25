@@ -1,0 +1,37 @@
+.form-container {
+    text-align: center;
+}
+
+.form-heading {
+    padding-top: 2%;
+
+}
+
+.form-heading h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+
+.form-group {
+    text-align: center;
+    margin: 3%;
+}
+
+.form-control {
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #4B82AA;
+    border-color: #4B82AA;
+    width: 100%;
+    border-radius: 10px;
+
+}
+
+.btn-primary:hover {
+    background-color: #4B82AA;
+    border-color: #4B82AA;
+}
+

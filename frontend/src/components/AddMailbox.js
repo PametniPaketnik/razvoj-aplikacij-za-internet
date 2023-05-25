@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { Navigate } from 'react-router';
 import { UserContext } from '../userContext';
+import './styles/AddMailbox.css';
 
 function AddMailbox(props) {
     const userContext = useContext(UserContext);
@@ -36,17 +37,69 @@ function AddMailbox(props) {
     }
 
     return (
-        <form className="form-group" onSubmit={onSubmit}>
+        <div className="form-container">
+            <div className="form-heading">
+                <h2>Add new mailbox</h2>
+            </div>
+        <form className="form-group mx-auto" onSubmit={onSubmit} style={{ maxWidth: "400px" }}>
             {!userContext.user ? <Navigate replace to="/login" /> : ""}
             {uploaded ? <Navigate replace to="/" /> : ""}
-            <input type="text" className="form-control" name="boxID" placeholder="BoxID" value={boxID} onChange={(e)=>{setBoxID(e.target.value)}}/>
-            <input type="text" className="form-control" name="street" placeholder="Street" value={street} onChange={(e)=>{setStreet(e.target.value)}}/>
-            <input type="text" className="form-control" name="postcode" placeholder="Postcode" value={postcode} onChange={(e)=>{setPostcode(e.target.value)}}/>
-            <input type="text" className="form-control" name="post" placeholder="Post" value={post} onChange={(e)=>{setPost(e.target.value)}}/>
-            <input type="text" className="form-control" name="open" placeholder="Open" value={open} onChange={(e)=>{setOpen(e.target.value)}}/>
-
-            <input className="btn btn-primary" type="submit" name="submit" value="Naloži" />
+            <div className="mb-3">
+                <input
+                    type="text"
+                    className="form-control"
+                    name="boxID"
+                    placeholder="BoxID"
+                    value={boxID}
+                    onChange={(e) => { setBoxID(e.target.value) }}
+                />
+            </div>
+            <div className="mb-3">
+                <input
+                    type="text"
+                    className="form-control"
+                    name="street"
+                    placeholder="Street"
+                    value={street}
+                    onChange={(e) => { setStreet(e.target.value) }}
+                />
+            </div>
+            <div className="mb-3">
+                <input
+                    type="text"
+                    className="form-control"
+                    name="postcode"
+                    placeholder="Postcode"
+                    value={postcode}
+                    onChange={(e) => { setPostcode(e.target.value) }}
+                />
+            </div>
+            <div className="mb-3">
+                <input
+                    type="text"
+                    className="form-control"
+                    name="post"
+                    placeholder="Post"
+                    value={post}
+                    onChange={(e) => { setPost(e.target.value) }}
+                />
+            </div>
+            <div className="mb-3">
+                <input
+                    type="text"
+                    className="form-control"
+                    name="open"
+                    placeholder="Open"
+                    value={open}
+                    onChange={(e) => { setOpen(e.target.value) }}
+                />
+            </div>
+            <div className="mb-3 text-center">
+                <input className="btn btn-primary" type="submit" name="submit" value="Add" />
+            </div>
         </form>
+        </div>
+
     )
 }
 
