@@ -19,6 +19,19 @@ npm install backend/
 npm install frontend/
 ```
 
+Once you have installed the repository you need to create a `database.json` file in `backend`
+```bash
+cd backend/
+touch database.json
+```
+
+`database.json` needs to look like this
+```json
+{
+    "cluster" : "INSERT YOUR CLUSTER LINK"
+}
+```
+
 # Run
 
 Launch backend with:
