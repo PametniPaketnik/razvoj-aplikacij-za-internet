@@ -139,8 +139,7 @@ module.exports = {
             mailbox.postcode = req.body.postcode ? req.body.postcode : mailbox.postcode;
             mailbox.post = req.body.post ? req.body.post : mailbox.post;
             mailbox.open = req.body.open ? req.body.open : mailbox.open;
-            mailbox.date = req.body.date ? req.body.date : mailbox.date;
-            mailbox.userId = req.body.userId ? req.body.userId : mailbox.userId;
+            mailbox.mailboxUser = req.body.mailboxUser ? req.body.mailboxUser : mailbox.mailboxUser;
 
             mailbox.save(function (err, mailbox) {
                 if (err) {
@@ -186,7 +185,7 @@ module.exports = {
         return res.render('mailbox/publish');
     },
 
-    update: function(req, res){
+    /*update: function(req, res){
         return res.render('mailbox/update');
-    }
+    }*/
 };

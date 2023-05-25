@@ -12,6 +12,7 @@ import ShowMailbox from "./components/ShowMailbox";
 import Histories from "./components/Histories";
 import MyMailbox from "./components/MyMailbox";
 import Home from "./components/Home";
+import UpdateMailbox from "./components/UpdateMailbox";
 
 function App() {
   /**
@@ -61,6 +62,8 @@ function App() {
             <Route path="/mailboxes/:id" element={<ShowMailbox />} />
             <Route path="/histories" element={<Histories />} />
             <Route path="/mymailbox/:userId" element={<MyMailbox />} />
+            <Route path="/update/:id" element={<UpdateMailbox />} />
+
           </Routes>
         </div>
       </UserContext.Provider>
