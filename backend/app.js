@@ -4,11 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('hbs');
+var database = require('./database.json');
 
 // vključimo mongoose in ga povežemo z MongoDB
 var mongoose = require('mongoose');
-var mongoDB = "mongodb+srv://sabinapa:sabinapa@cluster0.kqf11jz.mongodb.net/paketnik";
-//var mongoDB = "mongodb://127.0.0.1/paketnik";
+var mongoDB = database.cluster;
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
