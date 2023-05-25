@@ -48,7 +48,7 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border-radius: 30px;
+    border-radius: 10px;
     border-style: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -94,7 +94,7 @@
     flex: 1;
     width: 30%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #4B82AA;
     color: #fff;
     border: none;
     border-radius: 20px;
@@ -105,7 +105,12 @@
 .signin-button a{
     text-align: center;
     font-size: 16px;
-    margin-bottom: 4%;
+    margin-bottom: 5%;
 }
+
+
+
+
+
 
 
