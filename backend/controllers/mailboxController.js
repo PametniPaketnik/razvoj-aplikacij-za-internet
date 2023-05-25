@@ -8,6 +8,7 @@ module.exports = {
     list: function (req, res) {
         MailBoxModel.find()
             .populate('userId')
+            .populate('mailboxUser')
             .exec(function (err, mailboxes) {
             if (err) {
                 return res.status(500).json({
@@ -29,6 +30,7 @@ module.exports = {
 
         MailBoxModel.findOne({_id: id})
             .populate('userId')
+            .populate('mailboxUser')
             .exec(function (err, mailbox) {
             if (err) {
                 return res.status(500).json({
@@ -63,6 +65,28 @@ module.exports = {
         });
     },
 
+    showByMailboxUser: function (req, res) {
+        var id = req.params.id;
+
+        MailBoxModel.find({mailboxUser: id})
+            .populate('mailboxUser')
+            .exec(function (err, mailbox) {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'Error when getting mailbox.',
+                        error: err
+                    });
+                }
+
+                if (!mailbox) {
+                    return res.status(404).json({
+                        message: 'No such mailbox'
+                    });
+                }
+                return res.json(mailbox);
+            });
+    },
+
     /**
      * mailboxController.create()
      */
@@ -74,7 +98,8 @@ module.exports = {
             post : req.body.post,
             open : req.body.open,
             date : new Date(),
-            userId : req.session.userId
+            userId : req.session.userId,
+            mailboxUser : req.body.mailboxUser
         });
 
         mailbox.save(function (err, mailbox) {

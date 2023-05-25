@@ -4,7 +4,7 @@ import Histories from "./Histories";
 import Map from "./Map";
 import './styles/ShowMailbox.css';
 
-function ShowPhoto() {
+function ShowMailbox() {
     const { id } = useParams();
     const [mailbox, setMailbox] = useState(null);
     const [histories, setHistories] = useState([]);
@@ -49,6 +49,7 @@ function ShowPhoto() {
                                 </p>
                             </div>
                             <p className="mailbox-info">Open: {mailbox.open.toString()}</p>
+                            <p className="mailbox-info">Assign to: {mailbox.mailboxUser.username}</p>
                             <p className="mailbox-info">Date: {mailbox.date}</p>
                             <p className="mailbox-info">Added: {mailbox.userId.username}</p>
                         </div>
@@ -70,4 +71,4 @@ function ShowPhoto() {
     );
 }
 
-export default ShowPhoto;
+export default ShowMailbox;
