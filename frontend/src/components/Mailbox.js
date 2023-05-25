@@ -5,6 +5,7 @@ function Mailbox(props) {
     const mailboxId = props.mailbox._id;
     const isAdminSite = window.location.pathname === "/admin";
     const isNotAdminSite = window.location.pathname !== "/admin";
+    const isMyMailboxSite = window.location.pathname.startsWith("/mymailbox");
 
     async function onDelete(e){
         e.preventDefault();
@@ -39,6 +40,7 @@ function Mailbox(props) {
                             {isAdminSite && (
                                 <>
                                     <th>Read More</th>
+                                    <th>Update</th>
                                     <th>Delete</th>
                                 </>
                             )}
@@ -59,6 +61,11 @@ function Mailbox(props) {
                                     <td>
                                         <Link to={`/mailboxes/${mailboxId}`} className="mailbox-link">
                                             More info
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link to={`/update/${mailboxId}`} className="mailbox-link">
+                                            Update
                                         </Link>
                                     </td>
                                     <td>
@@ -84,9 +91,11 @@ function Mailbox(props) {
                     <p className="mailbox-info">Open: {props.mailbox.open.toString()}</p>
                     <p className="mailbox-info">Assign to: {props.mailbox.mailboxUser.username}</p>
 
-                    <Link to={`/mailboxes/${mailboxId}`} className="mailbox-link">
-                        More info
-                    </Link>
+                    {isMyMailboxSite && (
+                        <Link to={`/mailboxes/${mailboxId}`} className="mailbox-link">
+                            More info
+                        </Link>
+                    )}
                 </div>
             )}
         </div>
