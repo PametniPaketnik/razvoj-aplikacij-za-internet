@@ -52,7 +52,7 @@ function ShowPhoto() {
                         <p className="mailbox-info">Added: {mailbox.userId.username}</p>
                     </div>
                     <Histories histories={histories} />
-                    <Map street={mailbox.street} />
+                    <Map street={mailbox.street} postcode={mailbox.postcode} city={mailbox.post} country={"Slovenia"}/>
                 </div>
 
             ) : (
