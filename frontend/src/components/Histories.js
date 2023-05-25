@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import History from "./History";
 import {useParams} from "react-router-dom";
+import './styles/History.css'
 
 function Histories({ mailboxId }){
     const { id } = useParams();
@@ -16,7 +17,7 @@ function Histories({ mailboxId }){
 
     return(
         <div>
-            <h3>Histories:</h3>
+            <h3 className="histories-caption">Histories:</h3>
             <ul>
                 {histories.map((history) => (
                     <History history={history}
