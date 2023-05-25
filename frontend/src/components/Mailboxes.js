@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Mailbox from './Mailbox';
 import {Link} from "react-router-dom";
+import Map from './Map';
 
 function Mailboxes(){
     const [mailboxes, setMailboxes] = useState([]);
@@ -36,7 +37,7 @@ function Mailboxes(){
                     }}
                 ></Mailbox>))}
             </ul>
-            
+            <Map /> 
         </div>
     );
 }

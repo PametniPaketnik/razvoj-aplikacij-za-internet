@@ -97,6 +97,8 @@ module.exports = {
             postcode : req.body.postcode,
             post : req.body.post,
             country : req.body.country,
+            lat : req.body.lat,
+            lng : req.body.lng,
             open : req.body.open,
             date : new Date(),
             userId : req.session.userId,

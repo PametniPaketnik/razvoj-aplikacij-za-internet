@@ -7,6 +7,8 @@ var mailBoxSchema = new Schema({
     'postcode' : Number,
     'post' : String,
     'country' : String,
+    'lat' : Number,
+    'lng' : Number,
     'open' : Boolean,
     'date' : Date,
     'userId' :
@@ -19,7 +21,6 @@ var mailBoxSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref : 'user'
     }
-
 });
 
 var MailBox = mongoose.model('mailbox', mailBoxSchema);

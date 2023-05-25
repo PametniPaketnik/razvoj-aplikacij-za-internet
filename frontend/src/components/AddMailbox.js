@@ -3,6 +3,24 @@ import { Navigate } from 'react-router';
 import { UserContext } from '../userContext';
 import './styles/AddMailbox.css';
 
+const geocodeAddress = async (address, postcode, city, country) => {
+    const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&
+        street=${encodeURIComponent(address)}&
+        city=${encodeURIComponent(city)}&
+        country=${encodeURIComponent(country)}&
+        postalcode=${encodeURIComponent(postcode)}`
+    );
+    const data = await response.json();
+
+    if (data && data.length > 0) {
+        return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+    }
+    else {
+        throw new Error('Address not found' + address + postcode + city + country);
+    }
+};
+
 function AddMailbox(props) {
     const userContext = useContext(UserContext);
     const[boxID, setBoxID] = useState('');
@@ -12,7 +30,7 @@ function AddMailbox(props) {
     const[country, setCountry] = useState('');
     const[open, setOpen] = useState('');
     const[mailboxUser, setMailboxUser] = useState('');
-    const [users, setUsers] = useState([]);
+    const[users, setUsers] = useState([]);
     const[uploaded, setUploaded] = useState(false);
 
     useEffect(() => {
@@ -41,12 +59,16 @@ function AddMailbox(props) {
             return;
         }
 
+        const { lat, lng } = await geocodeAddress(street, postcode, post, country);
+
         const formData = new FormData();
         formData.append('boxID', boxID);
         formData.append('street', street);
         formData.append('postcode', postcode);
         formData.append('post', post);
         formData.append('country', country);
+        formData.append('lat', lat);
+        formData.append('lng', lng);
         formData.append('open', open);
         formData.append('mailboxUser', mailboxUser); // Send the selected userId
 
@@ -103,7 +125,7 @@ function AddMailbox(props) {
                     type="text"
                     className="form-control"
                     name="post"
-                    placeholder="Post"
+                    placeholder="City"
                     value={post}
                     onChange={(e) => { setPost(e.target.value) }}
                 />
@@ -114,7 +136,7 @@ function AddMailbox(props) {
                     className="form-control"
                     name="country"
                     placeholder="Country"
-                    value={post}
+                    value={country}
                     onChange={(e) => { setCountry(e.target.value) }}
                 />
             </div>
