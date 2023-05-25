@@ -45,7 +45,7 @@ function Map({street, postcode, city, country}) {
     
     if(location) {
         return (
-            <MapContainer center={location} zoom={13} scrollWheelZoom={false} style={{ height: '50vh', width: '25%' }}>
+            <MapContainer center={location} zoom={13} scrollWheelZoom={false} style={{ height: '80vh', width: '80%' }}>
                 <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

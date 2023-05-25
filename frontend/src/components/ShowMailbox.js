@@ -38,21 +38,29 @@ function ShowPhoto() {
     return (
         <div>
             {mailbox ? (
-                <div>
-                    <div className="mailbox-container-show">
-                        <h5 className="mailbox-name">Box ID: {mailbox.boxID}</h5>
-                        <div className="mailbox-box">
-                            <div className="mailbox-image"></div>
-                            <p className="mailbox-info">
-                                {mailbox.street}, {mailbox.postcode}, {mailbox.post}
-                            </p>
+                <div className="showMailbox-container">
+                    <div className="left-container">
+                        <div className="mailbox-container-show">
+                            <h5 className="mailbox-name">Box ID: {mailbox.boxID}</h5>
+                            <div className="mailbox-box">
+                                <div className="mailbox-image"></div>
+                                <p className="mailbox-info">
+                                    {mailbox.street}, {mailbox.postcode}, {mailbox.post}
+                                </p>
+                            </div>
+                            <p className="mailbox-info">Open: {mailbox.open.toString()}</p>
+                            <p className="mailbox-info">Date: {mailbox.date}</p>
+                            <p className="mailbox-info">Added: {mailbox.userId.username}</p>
                         </div>
-                        <p className="mailbox-info">Open: {mailbox.open.toString()}</p>
-                        <p className="mailbox-info">Date: {mailbox.date}</p>
-                        <p className="mailbox-info">Added: {mailbox.userId.username}</p>
+                        <div className="histories-container">
+                            <Histories histories={histories} mailboxId={mailbox.boxID} />
+                        </div>
                     </div>
-                    <Histories histories={histories} mailboxId={mailbox.boxID} />
-                    <Map street={mailbox.street} postcode={mailbox.postcode} city={mailbox.post} country={"Slovenia"}/>
+                    <div className="right-container">
+                        <div className="map-container">
+                            <Map street={mailbox.street} postcode={mailbox.postcode} city={mailbox.post} country={"Slovenia"}/>
+                        </div>
+                    </div>
                 </div>
 
             ) : (
