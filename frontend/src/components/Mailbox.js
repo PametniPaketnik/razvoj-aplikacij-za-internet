@@ -25,7 +25,7 @@ function Mailbox(props) {
                             )}
                         </tr>
                         <tr>
-                            <td>{props.mailbox.name}</td>
+                            <td>{props.mailbox.boxID}</td>
                             <td>
                                 <div className="mailbox-box">
                                     <div className="mailbox-image"></div>
@@ -54,7 +54,7 @@ function Mailbox(props) {
             )}
             {isNotAdminSite && (
                 <div className="mailbox-container">
-                    <h5 className="mailbox-name">Box ID: {props.mailbox.name}</h5>
+                    <h5 className="mailbox-name">Box ID: {props.mailbox.boxID}</h5>
                     <div className="mailbox-box">
                         <div className="mailbox-image"></div>
                         <p className="mailbox-info">

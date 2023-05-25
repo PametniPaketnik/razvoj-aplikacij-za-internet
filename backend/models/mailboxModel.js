@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema   = mongoose.Schema;
 
 var mailBoxSchema = new Schema({
-    'name' : String,
+    'boxID' : String,
     'street' : String,
     'postcode' : Number,
     'post' : String,

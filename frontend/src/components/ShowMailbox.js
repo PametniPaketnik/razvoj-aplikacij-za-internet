@@ -40,7 +40,7 @@ function ShowPhoto() {
             {mailbox ? (
                 <div>
                     <div className="mailbox-container-show">
-                        <h5 className="mailbox-name">Box ID: {mailbox.name}</h5>
+                        <h5 className="mailbox-name">Box ID: {mailbox.boxID}</h5>
                         <div className="mailbox-box">
                             <div className="mailbox-image"></div>
                             <p className="mailbox-info">
@@ -51,7 +51,7 @@ function ShowPhoto() {
                         <p className="mailbox-info">Date: {mailbox.date}</p>
                         <p className="mailbox-info">Added: {mailbox.userId.username}</p>
                     </div>
-                    <Histories histories={histories} />
+                    <Histories histories={histories} mailboxId={mailbox.boxID} />
                     <Map street={mailbox.street} postcode={mailbox.postcode} city={mailbox.post} country={"Slovenia"}/>
                 </div>
 
