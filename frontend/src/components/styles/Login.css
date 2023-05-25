@@ -65,12 +65,6 @@
     cursor: pointer;
 }
 
-a:hover
-{
-
-}
-
-
 .signup-button a{
     text-align: center;
     font-size: 16px;
@@ -95,4 +89,9 @@ a:hover
 .login-formform
 {
     padding-top: 50px;
+}
+
+.error
+{
+    padding-top: 3%;
 }

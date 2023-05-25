@@ -20,13 +20,15 @@ function Login(){
                 password: password
             })
         });
-        const data = await res.json();
-        if(data._id !== undefined){
+        if (res.ok) {
+            const data = await res.json();
             userContext.setUserContext(data);
-        } else {
+        } else if (res.status === 401) {
             setUsername("");
             setPassword("");
             setError("Invalid username or password");
+        } else {
+            setError("An error occurred. Please try again later.");
         }
     }
 
@@ -62,7 +64,7 @@ function Login(){
                         <input type="submit" name="submit" value="Sign in" />
                             <Link to="/register" className="nav-link">Sign up</Link>
                         </div>
-                        <label>{error}</label>
+                        <label className="error">{error}</label>
                     </form>
                     </div>
                 </div>
