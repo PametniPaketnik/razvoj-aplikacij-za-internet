@@ -1,11 +1,30 @@
 import {Link} from "react-router-dom";
-import DeleteButton from "./DeleteButton";
 import './styles/Mailbox.css';
 
 function Mailbox(props) {
     const mailboxId = props.mailbox._id;
     const isAdminSite = window.location.pathname === "/admin";
     const isNotAdminSite = window.location.pathname !== "/admin";
+
+    async function onDelete(e){
+        e.preventDefault();
+
+        const res = await fetch(`http://localhost:3001/mailboxes/delete/${props.mailbox._id}`, {
+            method: 'DELETE',
+            credentials: 'include',
+        });
+
+        console.log(props.mailbox._id)
+
+        if (res.status === 204) {
+            // The response is empty
+            props.onMailboxDeleted();
+        } else {
+            // The response is not empty, parse it as JSON
+            const data = await res.json();
+            props.onMailboxDeleted();
+        }
+    }
 
     return (
         <div>
@@ -43,7 +62,9 @@ function Mailbox(props) {
                                         </Link>
                                     </td>
                                     <td>
-                                        <DeleteButton id={props.mailbox._id} text="Delete mailbox" />
+                                        <button className="delete-button" type="button" value="Briši" onClick={onDelete}>
+                                            Delete mailbox
+                                        </button>
                                     </td>
                                 </>
                             )}

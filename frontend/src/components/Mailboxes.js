@@ -21,7 +21,18 @@ function Mailboxes(){
                 <Link to='/publish' className="mailbox-add">Add mailbox</Link>
             )}
             <ul>
-                {mailboxes.map(mailbox=>(<Mailbox mailbox={mailbox} key={mailbox._id}></Mailbox>))}
+                {mailboxes.map(mailbox=>(<Mailbox
+                    mailbox={mailbox}
+                    key={mailbox._id}
+                    onMailboxDeleted={() => {
+                        const getMailboxes = async function(){
+                            const res = await fetch(`http://localhost:3001`);
+                            const data = await res.json();
+                            setMailboxes(data);
+                        }
+                        getMailboxes();
+                    }}
+                ></Mailbox>))}
             </ul>
         </div>
     );
