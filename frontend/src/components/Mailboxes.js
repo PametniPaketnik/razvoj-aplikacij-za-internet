@@ -36,6 +36,7 @@ function Mailboxes(){
                     }}
                 ></Mailbox>))}
             </ul>
+            
         </div>
     );
 }

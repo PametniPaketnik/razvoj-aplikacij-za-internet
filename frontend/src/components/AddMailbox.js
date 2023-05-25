@@ -9,6 +9,7 @@ function AddMailbox(props) {
     const[street, setStreet] = useState('');
     const[postcode, setPostcode] = useState('');
     const[post, setPost] = useState('');
+    const[country, setCountry] = useState('');
     const[open, setOpen] = useState('');
     const[mailboxUser, setMailboxUser] = useState('');
     const [users, setUsers] = useState([]);
@@ -45,6 +46,7 @@ function AddMailbox(props) {
         formData.append('street', street);
         formData.append('postcode', postcode);
         formData.append('post', post);
+        formData.append('country', country);
         formData.append('open', open);
         formData.append('mailboxUser', mailboxUser); // Send the selected userId
 
@@ -104,6 +106,16 @@ function AddMailbox(props) {
                     placeholder="Post"
                     value={post}
                     onChange={(e) => { setPost(e.target.value) }}
+                />
+            </div>
+            <div className="mb-3">
+                <input
+                    type="text"
+                    className="form-control"
+                    name="country"
+                    placeholder="Country"
+                    value={post}
+                    onChange={(e) => { setCountry(e.target.value) }}
                 />
             </div>
             <div className="mb-3">

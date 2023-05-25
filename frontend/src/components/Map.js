@@ -55,11 +55,6 @@ function Map({street, postcode, city, country}) {
                         A pretty CSS3 popup. <br /> Easily customizable.
                     </Popup>
                 </Marker>
-                <Marker position={[46.5547, 15.6459]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
             </MapContainer>
         );
     }

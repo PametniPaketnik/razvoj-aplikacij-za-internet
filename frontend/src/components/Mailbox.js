@@ -49,7 +49,7 @@ function Mailbox(props) {
                                 <div className="mailbox-box">
                                     <div className="mailbox-image"></div>
                                     <p className="mailbox-info">
-                                        {props.mailbox.street}, {props.mailbox.postcode}, {props.mailbox.post}
+                                        {props.mailbox.street}, {props.mailbox.postcode}, {props.mailbox.post}, {props.mailbox.country}
                                     </p>
                                 </div>
                             </td>
@@ -78,7 +78,7 @@ function Mailbox(props) {
                     <div className="mailbox-box">
                         <div className="mailbox-image"></div>
                         <p className="mailbox-info">
-                            {props.mailbox.street}, {props.mailbox.postcode}, {props.mailbox.post}
+                            {props.mailbox.street}, {props.mailbox.postcode}, {props.mailbox.post}, {props.mailbox.country}
                         </p>
                     </div>
                     <p className="mailbox-info">Open: {props.mailbox.open.toString()}</p>

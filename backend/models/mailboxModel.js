@@ -6,6 +6,7 @@ var mailBoxSchema = new Schema({
     'street' : String,
     'postcode' : Number,
     'post' : String,
+    'country' : String,
     'open' : Boolean,
     'date' : Date,
     'userId' :
