@@ -63,7 +63,6 @@ function ShowMailbox() {
                         </div>
                     </div>
                 </div>
-
             ) : (
                 <p>Loading mailbox...</p>
             )}
