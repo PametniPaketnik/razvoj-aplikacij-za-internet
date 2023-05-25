@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { useEffect, useState } from 'react'
-import 'leaflet/dist/leaflet.css';
 
 const geocodeAddress = async (adress) => {
         const response = await fetch(
@@ -17,7 +16,7 @@ const geocodeAddress = async (adress) => {
         }
     };
 
-function Map({street, postcode, post}) {
+function Map({street}) {
     const [location, setLocation] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -51,7 +50,7 @@ function Map({street, postcode, post}) {
                 />
                 <Marker position={location}>
                     <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
+                        A pretty CSS3 popup. <br /> Easily customizable.
                     </Popup>
                 </Marker>
             </MapContainer>
