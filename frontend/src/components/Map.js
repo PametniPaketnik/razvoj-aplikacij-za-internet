@@ -3,7 +3,7 @@ import MapMarker from './MapMarker.js'
 
 function Map({lat, lng, id}) {
     return (
-        <MapContainer center={[lat, lng]} zoom={13} scrollWheelZoom={false} style={{ height: '80vh', width: '80%' }}>
+        <MapContainer className='rounded-map' center={[lat, lng]} zoom={13} scrollWheelZoom={false} style={{ height: '80vh', width: '80%' }}>
             <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

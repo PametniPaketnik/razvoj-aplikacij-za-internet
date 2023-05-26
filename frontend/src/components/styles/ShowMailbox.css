@@ -52,3 +52,7 @@
     overflow-y: auto;
     height: 45vh;
 }
+
+.rounded-map {
+    border-radius: 15px;
+}
