@@ -50,7 +50,7 @@ function Mailboxes(){
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        { mailboxes.map(mailbox=>(<MapMarker lng={mailbox.lng} lat={mailbox.lat} ></MapMarker>)) }
+                        { mailboxes.map(mailbox=>(<MapMarker lng={mailbox.lng} lat={mailbox.lat} id={mailbox.boxID} ></MapMarker>)) }
                     </MapContainer>
                 </div>
             </div>
