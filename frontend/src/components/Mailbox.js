@@ -11,6 +11,7 @@ function Mailbox(props) {
     const [users, setUsers] = useState([]);
     const[userId, setUserId] = useState('');
     const[uploaded, setUploaded] = useState(false);
+    const [accessUpdated, setAccessUpdated] = useState(false);
 
     async function onDelete(e){
         e.preventDefault();
@@ -71,7 +72,28 @@ function Mailbox(props) {
 
         // props.onMailboxDeleted();
         setUploaded(true);
+        setAccessUpdated(true); // Nastavi accessUpdated na true ob klicu onSubmit
     }
+
+    //Za osvežitev kode
+    useEffect(() => {
+        if (accessUpdated) {
+            // Osveži props.mailbox.accessUser na osnovi prejetih podatkov iz strežnika
+            const fetchMailbox = async () => {
+                try {
+                    const response = await fetch(
+                        `http://localhost:3001/mailboxes/${mailboxId}`
+                    );
+                    const data = await response.json();
+                    props.mailbox.accessUser = data.accessUser;
+                    setAccessUpdated(false); // Ponastavi accessUpdated na false
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+            fetchMailbox();
+        }
+    }, [accessUpdated, mailboxId, props.mailbox]);
 
     return (
         <div>
@@ -138,9 +160,9 @@ function Mailbox(props) {
                     <p className="mailbox-info">Assign to: {props.mailbox.mailboxUser.username}</p>
 
                     {props.mailbox.accessUser.length > 0 ? (
-                        <p className="mailbox-info">Access: {props.mailbox.accessUser.map(user => user.username).join(', ')}</p>
+                        <p className="Access">Access: {props.mailbox.accessUser.map(user => user.username).join(', ')}</p>
                     ) : (
-                        <p className="mailbox-info">Access: /</p>
+                        <p className="Access">Access: /</p>
                     )}
 
 
