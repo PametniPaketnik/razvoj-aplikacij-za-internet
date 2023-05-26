@@ -9,6 +9,7 @@ module.exports = {
         MailBoxModel.find()
             .populate('userId')
             .populate('mailboxUser')
+            .populate('accessUser')
             .exec(function (err, mailboxes) {
             if (err) {
                 return res.status(500).json({
@@ -31,6 +32,7 @@ module.exports = {
         MailBoxModel.findOne({_id: id})
             .populate('userId')
             .populate('mailboxUser')
+            .populate('accessUser')
             .exec(function (err, mailbox) {
             if (err) {
                 return res.status(500).json({
@@ -68,22 +70,29 @@ module.exports = {
     showByMailboxUser: function (req, res) {
         var id = req.params.id;
 
-        MailBoxModel.find({mailboxUser: id})
+        MailBoxModel.find({
+            $or: [
+                { mailboxUser: id },
+                { accessUser: { $in: [id] } }
+            ]
+        })
             .populate('mailboxUser')
-            .exec(function (err, mailbox) {
+            .populate('accessUser')
+            .exec(function (err, mailboxes) {
                 if (err) {
                     return res.status(500).json({
-                        message: 'Error when getting mailbox.',
+                        message: 'Error when getting mailboxes.',
                         error: err
                     });
                 }
 
-                if (!mailbox) {
+                if (mailboxes.length === 0) {
                     return res.status(404).json({
-                        message: 'No such mailbox'
+                        message: 'No mailboxes found.'
                     });
                 }
-                return res.json(mailbox);
+
+                return res.json(mailboxes);
             });
     },
 
