@@ -4,10 +4,6 @@
      align-items: center;
      height: 800px; /* Prilagodite želeni višini */
      width: 100%;
-     /*margin-left: 3%; */
-     /*padding-left: 2%;
-     padding-right: 2%;
-      */
 }
 
 .centered-image {
@@ -16,14 +12,3 @@
      width: 100%;
 }
 
-
-/*
-.centered-image {
-     object-fit: contain;
-     max-width: 100%;
-     max-height: 50%;
-     width: 100%;
-     height: auto;
-}
-
- */
