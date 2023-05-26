@@ -111,7 +111,8 @@ module.exports = {
             open : req.body.open,
             date : new Date(),
             userId : req.session.userId,
-            mailboxUser : req.body.mailboxUser
+            mailboxUser : req.body.mailboxUser,
+            accessUser: []
         });
 
         mailbox.save(function (err, mailbox) {
