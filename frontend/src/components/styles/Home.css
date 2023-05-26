@@ -1,9 +1,15 @@
-.centered-image {
-     object-fit: contain;
-     max-width: 100%;
-     max-height: 50%;
+.div-HOME {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 800px; /* Prilagodite želeni višini */
      width: 100%;
-     height: auto;
+}
+
+.centered-image {
+     max-width: 100%;
+     max-height: 100%;
+     width: 100%;
 }
 
 .rounded-map {

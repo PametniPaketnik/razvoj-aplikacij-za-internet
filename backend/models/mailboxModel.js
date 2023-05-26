@@ -20,7 +20,13 @@ var mailBoxSchema = new Schema({
     {
         type: Schema.Types.ObjectId,
         ref : 'user'
-    }
+    },
+    'accessUser' : [
+        {
+            type: Schema.Types.ObjectId,
+            ref : 'user'
+        }
+    ]
 });
 
 var MailBox = mongoose.model('mailbox', mailBoxSchema);

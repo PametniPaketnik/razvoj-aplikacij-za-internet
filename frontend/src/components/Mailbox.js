@@ -91,6 +91,13 @@ function Mailbox(props) {
                     <p className="mailbox-info">Open: {props.mailbox.open.toString()}</p>
                     <p className="mailbox-info">Assign to: {props.mailbox.mailboxUser.username}</p>
 
+                    {props.mailbox.accessUser.length > 0 ? (
+                        <p className="mailbox-info">Access: {props.mailbox.accessUser.map(user => user.username).join(', ')}</p>
+                    ) : (
+                        <p className="mailbox-info">Access: /</p>
+                    )}
+
+
                     {isMyMailboxSite && (
                         <Link to={`/mailboxes/${mailboxId}`} className="mailbox-link">
                             More info
