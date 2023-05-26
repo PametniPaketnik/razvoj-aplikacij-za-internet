@@ -1,11 +1,16 @@
 import {Link} from "react-router-dom";
 import './styles/Mailbox.css';
+import {useEffect, useState} from "react";
+import {Navigate} from "react-router";
 
 function Mailbox(props) {
     const mailboxId = props.mailbox._id;
     const isAdminSite = window.location.pathname === "/admin";
     const isNotAdminSite = window.location.pathname !== "/admin";
     const isMyMailboxSite = window.location.pathname.startsWith("/mymailbox");
+    const [users, setUsers] = useState([]);
+    const[userId, setUserId] = useState('');
+    const[uploaded, setUploaded] = useState(false);
 
     async function onDelete(e){
         e.preventDefault();
@@ -25,6 +30,47 @@ function Mailbox(props) {
             const data = await res.json();
             props.onMailboxDeleted();
         }
+    }
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch(`http://localhost:3001/users`);
+                const data = await response.json();
+                setUsers(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchUsers();
+    }, []);
+
+    async function onSubmit(e) {
+        e.preventDefault();
+
+        if (!userId) {
+            alert("Invalid user selected");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('userId', userId);
+
+        const res = await fetch(`http://localhost:3001/mailboxes/addAccessUser/${mailboxId}`, {
+            method: 'PUT',
+            credentials: 'include',
+            body: formData
+        });
+
+        if (res.status === 400) {
+            alert("User already has access to this mailbox");
+            return;
+        }
+
+        const data = await res.json();
+
+        // props.onMailboxDeleted();
+        setUploaded(true);
     }
 
     return (
@@ -99,9 +145,35 @@ function Mailbox(props) {
 
 
                     {isMyMailboxSite && (
-                        <Link to={`/mailboxes/${mailboxId}`} className="mailbox-link">
-                            More info
-                        </Link>
+                        <>
+                            <Link to={`/mailboxes/${mailboxId}`} className="mailbox-link">
+                                More info
+                            </Link>
+                            <form
+                                onSubmit={onSubmit}
+                                style={{ maxWidth: "200px" }}
+                            >
+                                <div className="mb-3">
+                                    <select
+                                        className="form-select"
+                                        name="mailboxUser"
+                                        value={userId}
+                                        onChange={(e) => {
+                                            const selectedUserId = e.target.value;
+                                            setUserId(selectedUserId);
+                                        }}
+                                    >
+                                        <option value="">assign to the user</option>
+                                        {users.map((user) => (
+                                            <option key={user._id} value={user._id}>
+                                                {user.username}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <input className="btn btn-primary" type="submit" name="submit" value="Add access" />
+                            </form>
+                        </>
                     )}
                 </div>
             )}

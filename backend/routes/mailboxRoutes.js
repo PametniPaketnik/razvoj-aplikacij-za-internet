@@ -26,6 +26,7 @@ router.get('/showByMailboxUser/:id', mailboxController.showByMailboxUser);
 router.post('/', upload.single('image'), mailboxController.create);
 
 router.put('/update/:id', upload.none(), mailboxController.update);
+router.put('/addAccessUser/:id', upload.none(), mailboxController.addAccessUser);
 
 router.delete('/delete/:id', mailboxController.remove);
 

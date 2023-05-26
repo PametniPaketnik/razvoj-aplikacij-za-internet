@@ -89,7 +89,7 @@ function AddMailbox(props) {
             </div>
         <form className="form-group mx-auto" onSubmit={onSubmit} style={{ maxWidth: "400px" }}>
             {!userContext.user ? <Navigate replace to="/login" /> : ""}
-            {uploaded ? <Navigate replace to="/" /> : ""}
+            {uploaded ? <Navigate replace to="/admin" /> : ""}
             <div className="mb-3">
                 <input
                     type="text"
