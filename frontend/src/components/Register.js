@@ -52,7 +52,7 @@ function Register() {
                 <div className="register-form">
                     <div className="register-title">
                         <h2>Welcome!</h2>
-                        <h3>Sign UP to your Account</h3>
+                        <h3>Sign up to your Account</h3>
                     </div>
                     <div className="register-formform">
                         <form onSubmit={Register}>
