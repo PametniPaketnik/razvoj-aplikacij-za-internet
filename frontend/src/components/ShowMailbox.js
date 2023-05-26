@@ -50,6 +50,13 @@ function ShowMailbox() {
                             </div>
                             <p className="mailbox-info">Open: {mailbox.open.toString()}</p>
                             <p className="mailbox-info">Assign to: {mailbox.mailboxUser.username}</p>
+
+                            {mailbox.accessUser.length > 0 ? (
+                                <p className="mailbox-info">Access: {mailbox.accessUser.map(user => user.username).join(', ')}</p>
+                            ) : (
+                                <p className="mailbox-info">Access: /</p>
+                            )}
+
                             <p className="mailbox-info">Date: {mailbox.date}</p>
                             <p className="mailbox-info">Added: {mailbox.userId.username}</p>
                         </div>
