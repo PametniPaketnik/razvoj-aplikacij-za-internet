@@ -6,8 +6,8 @@ import Mailboxes from "./Mailboxes";
 function Home() {
     return (
         <div>
-            <div>
-                <img src={image} className="centered-image"/>
+            <div className="div-HOME">
+                <img src={image} className="centered-image" alt="Naslovna slika"/>
             </div>
             <Mailboxes></Mailboxes>
         </div>
