@@ -2,13 +2,15 @@ import {useContext} from "react";
 import {UserContext} from "../userContext";
 import {Link} from "react-router-dom";
 import './styles/Header.css';
+import titleImg from "./pictures/box.png";
 
 function Header(props) {
     return (
         <header>
             <div className="maindiv">
-                <div className={"title"}>
-                    <h1>{props.title}</h1>
+                <div className="title">
+                    <img className="title-img" src={titleImg} />
+                    <h2 className="h2-title">{props.title}</h2>
                 </div>
                 <div className="othersdiv">
                     <UserContext.Consumer>
