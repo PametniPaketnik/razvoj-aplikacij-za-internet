@@ -59,7 +59,7 @@ function ShowMailbox() {
                     </div>
                     <div className="right-container">
                         <div className="map-container">
-                            <Map lat={mailbox.lat} lng={mailbox.lng}/>
+                            <Map lat={mailbox.lat} lng={mailbox.lng} id={mailbox.boxID}/>
                         </div>
                     </div>
                 </div>
