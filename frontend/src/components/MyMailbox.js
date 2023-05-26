@@ -8,17 +8,25 @@ function MyMailbox() {
     const [mailboxes, setMailboxes] = useState([]);
     const [mailboxId, setMailboxId] = useState(null);
 
-    useEffect(function(){
-        const getMailboxes = async function(){
+    useEffect(() => {
+        const getMailboxes = async () => {
             const res = await fetch(`http://localhost:3001/mailboxes/showByMailboxUser/${userId}`);
             const data = await res.json();
-            console.log(data)
-            const filteredMailboxes = data.filter(mailbox => mailbox.mailboxUser._id === userId);
-            const mailboxId = filteredMailboxes.map(mailbox => mailbox._id);
-            console.log(mailboxId)
-            setMailboxId(mailboxId); //pripravljeno če kako drugace naredili
+            console.log(data);
+
+            const filteredMailboxes = data.filter(mailbox => {
+                return (
+                    mailbox.mailboxUser._id === userId ||
+                    mailbox.accessUser.some(user => user._id === userId)
+                );
+            });
+
+            const mailboxIds = filteredMailboxes.map(mailbox => mailbox._id);
+            console.log(mailboxIds);
+            setMailboxId(mailboxIds);
             setMailboxes(filteredMailboxes);
-        }
+        };
+
         getMailboxes();
     }, []);
 
