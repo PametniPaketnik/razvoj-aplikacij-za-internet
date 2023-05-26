@@ -145,7 +145,6 @@ module.exports = {
                     message: 'No such mailbox'
                 });
             }
-
             mailbox.boxID = req.body.boxID ? req.body.boxID : mailbox.boxID;
             mailbox.street = req.body.street ? req.body.street : mailbox.street;
             mailbox.postcode = req.body.postcode ? req.body.postcode : mailbox.postcode;
@@ -160,7 +159,6 @@ module.exports = {
                         error: err
                     });
                 }
-
                 return res.json(mailbox);
             });
         });

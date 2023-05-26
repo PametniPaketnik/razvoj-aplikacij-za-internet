@@ -72,15 +72,16 @@ function UpdateMailbox(props) {
         formData.append('open', open);
         formData.append('mailboxUser', mailboxUser);
 
+        /*
+        for (const [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+         */
         const res = await fetch(`http://localhost:3001/mailboxes/update/${id}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
+            body: formData
         });
         const data = await res.json();
-
         setUploaded(true);
     }
 
