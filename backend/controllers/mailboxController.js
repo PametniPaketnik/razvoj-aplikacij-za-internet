@@ -127,6 +127,52 @@ module.exports = {
         });
     },
 
+    addAccessUser: function (req, res) {
+        var id = req.params.id;
+        var userId = req.body.userId; // Assuming the user ID is provided in the request body
+
+        MailBoxModel.findOne({_id: id}, function (err, mailbox) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when getting mailbox',
+                    error: err
+                });
+            }
+
+            if (!mailbox) {
+                return res.status(404).json({
+                    message: 'No such mailbox'
+                });
+            }
+
+            // Check if the user is already in the accessUser array
+            if (mailbox.accessUser.includes(userId)) {
+                return res.status(400).json({
+                    message: 'User already has access to this mailbox'
+                });
+            }
+
+            // Check if the assigned user is the same as the mailbox owner (mailboxUser)
+            if (userId === mailbox.mailboxUser.toString()) {
+                return res.status(400).json({
+                    message: 'Cannot assign the same user as the mailbox owner'
+                });
+            }
+
+            mailbox.accessUser.push(userId);
+
+            mailbox.save(function (err, mailbox) {
+                if (err) {
+                    return res.status(500).json({
+                        message: 'Error when updating mailbox',
+                        error: err
+                    });
+                }
+                return res.json(mailbox);
+            });
+        });
+    },
+
     /**
      * mailboxController.update()
      */
