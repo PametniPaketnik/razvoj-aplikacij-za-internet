@@ -16,6 +16,8 @@ var userSchema = new Schema({
 	'street' : String,
 	'postcode' : String,
 	'path' : String,
+    'lat' : Number,
+    'lng' : Number
 });
 
 userSchema.pre('save', function(next){
