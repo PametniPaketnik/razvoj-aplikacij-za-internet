@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet'
+import { UserContext } from '../userContext';
+import { Link } from "react-router-dom";
 import Mailbox from './Mailbox';
 import MapMarker from './MapMarker';
-import { Link } from "react-router-dom";
 import './styles/Mailboxes.css';
 
 function Mailboxes(){
+    const userContext = useContext(UserContext);
     const [mailboxes, setMailboxes] = useState([]);
     const isAdminSite = window.location.pathname === "/admin";
     const location = [46.5547, 15.6459];
