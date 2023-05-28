@@ -2,6 +2,22 @@ import {useState} from 'react';
 import {Link} from "react-router-dom";
 import './styles/Register.css';
 
+const geocodeAddress = async (address, postcode, city, country) => {
+    const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&
+        street=${encodeURIComponent(address)}&
+        postalcode=${encodeURIComponent(postcode)}`
+    );
+    const data = await response.json();
+
+    if (data && data.length > 0) {
+        return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+    }
+    else {
+        throw new Error('Address not found' + address + postcode + city + country);
+    }
+};
+
 function Register() {
     const [username, setUsername] = useState([]);
     const [password, setPassword] = useState([]);
@@ -16,6 +32,9 @@ function Register() {
 
     async function Register(e) {
         e.preventDefault();
+
+        const { lat, lng } = await geocodeAddress(street, postcode);
+
         const formData = new FormData();
         formData.append('email', email);
         formData.append('username', username);
@@ -26,6 +45,8 @@ function Register() {
         formData.append('street', street);
         formData.append('postcode', postcode);
         formData.append('image', file);
+        formData.append('lat', lat);
+        formData.append('lng', lng);
 
         const res = await fetch('http://localhost:3001/users', {
             method: 'POST',
