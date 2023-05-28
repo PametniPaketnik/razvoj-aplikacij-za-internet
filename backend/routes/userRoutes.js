@@ -16,7 +16,7 @@ router.get('/:id', userController.show);
 router.post('/', upload.single('image'), userController.create);
 router.post('/login', userController.login);
 
-router.put('/:id', userController.update);
+router.put('/:id', upload.none(), userController.update);
 
 router.delete('/:id', userController.remove);
 

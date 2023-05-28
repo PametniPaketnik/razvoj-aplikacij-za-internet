@@ -59,7 +59,9 @@ module.exports = {
             tel : req.body.tel,
             street : req.body.street,
             postcode : req.body.postcode,
-            path : "/images/"+req.file.filename,
+            path : "/images/" + req.file.filename,
+            lat : req.body.lat,
+            lng : req.body.lng
         });
 
         user.save(function (err, user) {
@@ -80,6 +82,7 @@ module.exports = {
      */
     update: function (req, res) {
         var id = req.params.id;
+        console.log(req.body.firstname)
 
         UserModel.findOne({_id: id}, function (err, user) {
             if (err) {
@@ -95,16 +98,15 @@ module.exports = {
                 });
             }
 
-            user.username = req.body.username ? req.body.username : user.username;
-			user.password = req.body.password ? req.body.password : user.password;
 			user.email = req.body.email ? req.body.email : user.email;
-            user.firstName = req.body.firstName ? req.body.firstName : user.firstName;
-            user.lastName = req.body.lastName ? req.body.lastName : user.lastName;
+            user.firstName = req.body.firstname ? req.body.firstname : user.firstName;
+            user.lastName = req.body.lastname ? req.body.lastname : user.lastName;
             user.tel = req.body.tel ? req.body.tel : user.tel;
             user.street = req.body.street ? req.body.street : user.street;
             user.postcode = req.body.postcode ? req.body.postcode : user.postcode;
             user.post = req.body.post ? req.body.post : user.post;
-            user.path = req.body.path ? req.body.path : user.path;
+            user.lat = req.body.lat;
+            user.lng = req.body.lng;
 			
             user.save(function (err, user) {
                 if (err) {
