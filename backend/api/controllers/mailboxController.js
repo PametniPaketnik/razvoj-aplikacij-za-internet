@@ -20,7 +20,7 @@ module.exports = {
     get: function (req, res) {
         var id = req.params.id;
 
-        MailBoxModel.findOne({_id: id})
+        MailBoxModel.findOne({boxID: id})
             .populate('userId')
             .exec(function (err, mailbox) {
                 if (err) {
@@ -36,23 +36,7 @@ module.exports = {
                     });
                 }
 
-                HistoryModel.find({ parentMailBox: id })
-                    .populate('parentMailBox')
-                    .exec(function(err, histories) {
-                        if (err) {
-                            return res.status(500).json({
-                                message: 'Error when getting histories.',
-                                error: err
-                            });
-                        }
-
-                        var data = {
-                            mailbox: mailbox,
-                            histories: histories,
-                        };
-                        //return res.render('mailbox/show', data);
-                        return res.json(data);
-                    });
+                return res.json(mailbox);
             });
     },
 
