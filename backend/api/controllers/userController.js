@@ -1,4 +1,5 @@
 var UserModel = require('../../models/userModel.js');
+var bcrypt = require('bcrypt');
 
 /**
  * userController.js
@@ -139,15 +140,27 @@ module.exports = {
     },
 
     login: function(req, res, next){
-        UserModel.authenticate(req.body.username, req.body.password, function(err, user){
-            if(err || !user){
-                var err = new Error('Wrong username or paassword');
+        var username = req.body.username;
+        var password = req.body.password;
+
+        UserModel.findOne({ username: username }, function (err, user) {
+            if (err || !user) {
+                var err = new Error('Wrong username');
                 err.status = 401;
                 return next(err);
             }
-            req.session.userId = user._id;
 
-            return res.json(user);
+            // Compare the submitted password with the stored hash
+            bcrypt.compare(password, user.password, function (err, isMatch) {
+                if (err || !isMatch) {
+                    var err = new Error('Wrong password');
+                    err.status = 401;
+                    console.log(err)
+                    return next(err);
+                }
+
+                return res.json(user);
+            });
         });
     },
 
