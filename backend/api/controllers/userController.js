@@ -48,21 +48,20 @@ module.exports = {
     },
 
     /**
-     * userController.create()
+     * userController.register()
      */
-    create: function (req, res) {
+    register: function (req, res) {
+        console.log(req.body.username);
+
         var user = new UserModel({
 			username : req.body.username,
 			password : req.body.password,
             email : req.body.email,
-			firstName : req.body.firstname,
-            lastName : req.body.lastname,
+			firstName : req.body.firstName,
+            lastName : req.body.lastName,
             tel : req.body.tel,
             street : req.body.street,
             postcode : req.body.postcode,
-            path : "/images/" + req.file.filename,
-            lat : req.body.lat,
-            lng : req.body.lng
         });
 
         user.save(function (err, user) {

@@ -14,6 +14,7 @@ router.get('/mailbox/:id', mailboxController.get);
 router.get('/user/', userController.getAll);
 router.get('/user/:id', userController.get);
 router.post('/user/login', userController.login);
+router.post('/user/register', userController.register);
 router.post('/user/logout', userController.logout);
 
 router.get('/history/', historyController.getAll);
