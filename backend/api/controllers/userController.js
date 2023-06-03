@@ -1,6 +1,22 @@
 var UserModel = require('../../models/userModel.js');
 var bcrypt = require('bcrypt');
 
+const geocodeAddress = async (address, postcode) => {
+    const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&
+        street=${encodeURIComponent(address)}&
+        postalcode=${encodeURIComponent(postcode)}`
+    );
+    const data = await response.json();
+
+    if (data && data.length > 0) {
+        return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+    }
+    else {
+        throw new Error('Address not found' + address + postcode);
+    }
+};
+
 /**
  * userController.js
  *
@@ -50,8 +66,8 @@ module.exports = {
     /**
      * userController.register()
      */
-    register: function (req, res) {
-        console.log(req.body.username);
+    register: async function (req, res) {
+        const { lat, lng } = await geocodeAddress(req.body.street, req.body.postCode);
 
         var user = new UserModel({
 			username : req.body.username,
@@ -61,7 +77,9 @@ module.exports = {
             lastName : req.body.lastName,
             tel : req.body.tel,
             street : req.body.street,
-            postcode : req.body.postcode,
+            postcode : req.body.postCode,
+            lat: lat,
+            lng: lng
         });
 
         user.save(function (err, user) {
