@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const fsExtra = require('fs-extra');
 
 function saveImage(imageBytes, userId) {
     return new Promise((resolve, reject) => {
@@ -45,6 +46,9 @@ module.exports = {
         saveImage(imageBytes, userId)
             .then((imageFilePath) => {
                 // Perform face detection or other processing on the image here
+
+                // Delete the userImages directory after sending the response
+                //fsExtra.removeSync(path.join('public', 'userImages', userId));
 
                 // Return the response
                 res.send('Image uploaded and processed successfully');
