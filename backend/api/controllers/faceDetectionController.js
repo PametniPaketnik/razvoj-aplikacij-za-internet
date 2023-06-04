@@ -1,7 +1,6 @@
-// faceDetectionController.js
-
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process');
 
 function saveImage(imageFile, userId) {
     return new Promise((resolve, reject) => {
@@ -34,7 +33,7 @@ function saveImage(imageFile, userId) {
 module.exports = {
     detect: (req, res) => {
         // Get the userId from the request body
-        const userId = req.body.userId;
+        const userId = req.body.id;
 
         // Access the uploaded image file
         const uploadedImage = req.file;
@@ -47,9 +46,34 @@ module.exports = {
         saveImage(uploadedImage, userId)
             .then((imageFilePath) => {
                 // Perform face detection or other processing on the image here
+                // Najbolj grda koda, ugabno
+                // To morem nujno spremenit
+                let uploadedImagePath = path.dirname(uploadedImage.path);
+                uploadedImagePath = uploadedImagePath + "/" + userId;
+                
+                const scriptPath = path.join(__dirname, `../../../../osnove-racunalniskega-vida/src/login.py`);
+                const imagePath = path.join(__dirname, `../../${imageFilePath}`);
+                const outputPath = path.join(__dirname, `../../${uploadedImagePath}/obraz.jpg`);
+                const script = `python ${scriptPath} --id ${userId} --imgpath '${imagePath}' --outputpath '${outputPath}'`;
 
-                // Return the response
-                res.send('Image uploaded and processed successfully');
+                exec(script, (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(`Error executing Python script: ${error}`);
+                        return res.status(500).send('Internal Server Error');
+                    }
+                    
+                    // Capture the output of the Python script
+                    const output = stdout.trim();
+
+                    // Return the response
+                    console.log(output)
+                    if(output === "True") {
+                        res.send('Image uploaded and processed successfully');
+                    }
+                    else {
+                        res.status(500).send("Napaka v scripti!");
+                    }
+                });
             })
             .catch((error) => {
                 res.status(500).send(error);
