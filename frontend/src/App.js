@@ -14,6 +14,7 @@ import MyMailbox from "./components/MyMailbox";
 import Home from "./components/Home";
 import UpdateMailbox from "./components/UpdateMailbox";
 import EditProfile from "./components/EditProfile";
+import Test from "./components/Test";
 
 function App() {
   /**
@@ -65,6 +66,7 @@ function App() {
             <Route path="/mymailbox/:userId" element={<MyMailbox />} />
             <Route path="/update/:id" element={<UpdateMailbox />} />
             <Route path="/profile/edit" element={<EditProfile />}></Route>
+            <Route path="/test" element={<Test />}></Route>
 
           </Routes>
         </div>
