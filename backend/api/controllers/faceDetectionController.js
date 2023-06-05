@@ -3,9 +3,12 @@ const path = require('path');
 const { exec } = require('child_process');
 const fsExtra = require('fs-extra');
 
-function saveImage(imageBytes, userId) {
+function saveImage(imageData, userId) {
     return new Promise((resolve, reject) => {
-        // Get the file extension
+        // Convert the base64-encoded image data to a buffer
+        const imageBuffer = Buffer.from(imageData, 'base64');
+
+        // Generate the file extension
         const fileExtension = '.jpg';
 
         // Generate the image filename with the userId and file extension
@@ -21,7 +24,7 @@ function saveImage(imageBytes, userId) {
 
         // Save the image to the userImages directory with the generated filename
         const imageFilePath = path.join(userImagesDir, imageFilename);
-        fs.writeFile(imageFilePath, imageBytes, 'binary', (err) => {
+        fs.writeFile(imageFilePath, imageBuffer, (err) => {
             if (err) {
                 reject('Failed to save the image');
             } else {
@@ -37,8 +40,11 @@ module.exports = {
         const userId = req.body.id;
 
         // Access the uploaded image byte array
-        const imageBytes = Buffer.from(req.body.image, 'base64');
+        //const imageBytes = Buffer.from(req.body.image, 'base64');
+        //const imageBytes = req.file
 
+        const imageBytes = req.body.image
+        console.log(req.body.image)
         // Check if an image was uploaded
         if (!imageBytes) {
             return res.status(400).send('No image found in the request');
@@ -49,13 +55,19 @@ module.exports = {
                 // Perform face detection or other processing on the image here
                 // Najbolj grda koda, ugabno AAAAAAAAAAAAAAAAA
                 // To morem nujno spremenit
+
                 let uploadedImagePath = path.dirname(imageBytes.path);
+                console.log(imageBytes.path)
+
                 uploadedImagePath = uploadedImagePath + "/" + userId;
-                
+
                 const scriptPath = path.join(__dirname, `../../../../osnove-racunalniskega-vida/src/login.py`);
                 const imagePath = path.join(__dirname, `../../${imageFilePath}`);
+                console.log(imagePath)
                 const outputPath = path.join(__dirname, `../../${uploadedImagePath}/obraz.jpg`);
+                console.log(outputPath)
                 const script = `python ${scriptPath} --id ${userId} --imgpath '${imagePath}' --outputpath '${outputPath}'`;
+
 
                 exec(script, (error, stdout, stderr) => {
                     if (error) {
