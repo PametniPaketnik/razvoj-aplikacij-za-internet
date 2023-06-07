@@ -44,7 +44,8 @@ module.exports = {
         //const imageBytes = req.file
 
         const imageBytes = req.body.image
-        console.log(req.body.image)
+        //console.log(req.body.image)
+
         // Check if an image was uploaded
         if (!imageBytes) {
             return res.status(400).send('No image found in the request');
@@ -56,18 +57,21 @@ module.exports = {
                 // Najbolj grda koda, ugabno AAAAAAAAAAAAAAAAA
                 // To morem nujno spremenit
 
-                let uploadedImagePath = path.dirname(imageBytes.path);
-                console.log(imageBytes.path)
+                console.log(imageFilePath)
+                //let uploadedImagePath = path.dirname(imageBytes.path);
+                //uploadedImagePath = uploadedImagePath + "/" + userId;
 
-                uploadedImagePath = uploadedImagePath + "/" + userId;
 
                 const scriptPath = path.join(__dirname, `../../../../osnove-racunalniskega-vida/src/login.py`);
-                const imagePath = path.join(__dirname, `../../${imageFilePath}`);
+                console.log(scriptPath)
+                //const imagePath = path.join(__dirname, `../../public/userImages/${userId}/${userId}.jpg`);
+                const imagePath = path.resolve(__dirname, '..', '..', 'public', 'userImages', userId, userId + '.jpg');
                 console.log(imagePath)
-                const outputPath = path.join(__dirname, `../../${uploadedImagePath}/obraz.jpg`);
+                //const outputPath = path.join(__dirname, `../../public/userImages/${userId}/obraz.jpg`);
+                const outputPath = path.resolve(__dirname, '..', '..', 'public', 'userImages', userId, 'obraz.jpg');
                 console.log(outputPath)
+                console.log(userId)
                 const script = `python ${scriptPath} --id ${userId} --imgpath '${imagePath}' --outputpath '${outputPath}'`;
-
 
                 exec(script, (error, stdout, stderr) => {
                     if (error) {
@@ -83,7 +87,7 @@ module.exports = {
                     if(output === "True") {
                         // Delete the userImages directory after sending the response
                         // fsExtra.removeSync(path.join('public', 'userImages', userId));
-                        res.send('Image uploaded and processed successfully');
+                        res.send(true);
                     }
                     else {
                         res.status(500).send("Napaka v scripti!");
