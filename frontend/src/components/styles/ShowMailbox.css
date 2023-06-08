@@ -56,3 +56,7 @@
 .rounded-map {
     border-radius: 15px;
 }
+
+.leaflet-control-container .leaflet-routing-container-hide {
+    display: none;
+}

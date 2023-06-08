@@ -52,9 +52,11 @@ function MyMailbox() {
                 </ul>
             </div> 
             <div className="right-container">
-                <div className="map-container">
-                    <Route location1={[userContext.user.lat, userContext.user.lng]} location2={[mailboxes[0].lat, mailboxes[0].lng]} /> 
-                </div>
+                {mailboxes.map(mailbox=>(
+                    <div className="map-container">
+                        <Route location1={[userContext.user.lat, userContext.user.lng]} location2={[mailbox.lat, mailbox.lng]}></Route>
+                    </div>
+                ))}
             </div>
         </div>
     );

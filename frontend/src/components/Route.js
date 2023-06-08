@@ -23,7 +23,7 @@ const Route = ({ location1, location2 }) => {
                     L.latLng(location1),
                     L.latLng(location2),
                 ],
-            }).addTo(map);
+            }).addTo(map).hide();
 
             return () => {
                 // Clean up the routing control when the component unmounts
@@ -36,11 +36,10 @@ const Route = ({ location1, location2 }) => {
     }, [location1, location2]);
 
     return (
-        <MapContainer ref={mapRef} style={{ height: '400px', width: '100%' }}>
+        <MapContainer ref={mapRef} className='rounded-map' zoom={13} scrollWheelZoom={false} style={{ height: '40vh', width: '90%' }}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="Map data © OpenStreetMap contributors" />
         </MapContainer>
     );
 };
 
 export default Route;
-
