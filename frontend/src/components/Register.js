@@ -2,19 +2,23 @@ import {useState} from 'react';
 import {Link} from "react-router-dom";
 import './styles/Register.css';
 
-const geocodeAddress = async (address, postcode, city, country) => {
+const geocodeAddress = async (address, postcode) => {
+    console.log('Street:', address);
+    console.log('Postcode:', postcode);
+
     const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&
-        street=${encodeURIComponent(address)}&
-        postalcode=${encodeURIComponent(postcode)}`
+        `https://nominatim.openstreetmap.org/search?format=json&` +
+        `street=${encodeURIComponent(address)}&` +
+        `postalcode=${encodeURIComponent(postcode)}`
     );
+    console.log('Response:', response);
     const data = await response.json();
 
     if (data && data.length > 0) {
         return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
     }
     else {
-        throw new Error('Address not found' + address + postcode + city + country);
+        throw new Error('Address not found' + address + postcode);
     }
 };
 

@@ -3,11 +3,11 @@ import { Navigate } from 'react-router';
 import { UserContext } from '../userContext';
 import './styles/AddMailbox.css';
 
-const geocodeAddress = async (address, postcode, city, country) => {
+const geocodeAddress = async (address, postcode) => {
     const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&
-        street=${encodeURIComponent(address)}&
-        postalcode=${encodeURIComponent(postcode)}`
+        `https://nominatim.openstreetmap.org/search?format=json&` +
+        `street=${encodeURIComponent(address)}&` +
+        `postalcode=${encodeURIComponent(postcode)}`
     );
     const data = await response.json();
 
@@ -15,7 +15,7 @@ const geocodeAddress = async (address, postcode, city, country) => {
         return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
     }
     else {
-        throw new Error('Address not found' + address + postcode + city + country);
+        throw new Error('Address not found' + address + postcode);
     }
 };
 
