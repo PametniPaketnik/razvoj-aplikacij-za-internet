@@ -43,8 +43,8 @@ function Register() {
         formData.append('email', email);
         formData.append('username', username);
         formData.append('password', password);
-        formData.append('firstname', firstname);
-        formData.append('lastname', lastname);
+        formData.append('firstName', firstname);
+        formData.append('lastName', lastname);
         formData.append('tel', tel);
         formData.append('street', street);
         formData.append('postcode', postcode);
@@ -114,7 +114,7 @@ function Register() {
                                 />
                                 <input
                                     type="text"
-                                    name="lastname"
+                                    name="lastName"
                                     placeholder="Last Name"
                                     value={lastname}
                                     onChange={(e) => setLastname(e.target.value)}
