@@ -1,11 +1,12 @@
 var UserModel = require('../../models/userModel.js');
 var bcrypt = require('bcrypt');
 
+
 const geocodeAddress = async (address, postcode) => {
     const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&
-        street=${encodeURIComponent(address)}&
-        postalcode=${encodeURIComponent(postcode)}`
+        `https://nominatim.openstreetmap.org/search?format=json&` +
+        `street=${encodeURIComponent(address)}&` +
+        `postalcode=${encodeURIComponent(postcode)}`
     );
     const data = await response.json();
 
@@ -13,7 +14,7 @@ const geocodeAddress = async (address, postcode) => {
         return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
     }
     else {
-        throw new Error('Address not found' + address + postcode);
+        throw new Error('Address not found ' + address + postcode);
     }
 };
 
@@ -66,8 +67,9 @@ module.exports = {
     /**
      * userController.register()
      */
-    register: async function (req, res) {
-        const { lat, lng } = await geocodeAddress(req.body.street, req.body.postCode);
+    register: async function (req, res)
+    {
+        const { lat, lng } = await geocodeAddress(req.body.street, req.body.postcode);
 
         var user = new UserModel({
 			username : req.body.username,
@@ -77,7 +79,7 @@ module.exports = {
             lastName : req.body.lastName,
             tel : req.body.tel,
             street : req.body.street,
-            postcode : req.body.postCode,
+            postcode : req.body.postcode,
             lat: lat,
             lng: lng
         });
@@ -99,7 +101,7 @@ module.exports = {
      */
     update: function (req, res) {
         var id = req.params.id;
-        console.log(req.body.firstname)
+        console.log(req.body.firstName)
 
         UserModel.findOne({_id: id}, function (err, user) {
             if (err) {
@@ -116,8 +118,8 @@ module.exports = {
             }
 
 			user.email = req.body.email ? req.body.email : user.email;
-            user.firstName = req.body.firstname ? req.body.firstname : user.firstName;
-            user.lastName = req.body.lastname ? req.body.lastname : user.lastName;
+            user.firstName = req.body.firstName ? req.body.firstName : user.firstName;
+            user.lastName = req.body.lastName ? req.body.lastName : user.lastName;
             user.tel = req.body.tel ? req.body.tel : user.tel;
             user.street = req.body.street ? req.body.street : user.street;
             user.postcode = req.body.postcode ? req.body.postcode : user.postcode;

@@ -54,8 +54,8 @@ module.exports = {
 			username : req.body.username,
 			password : req.body.password,
             email : req.body.email,
-			firstName : req.body.firstname,
-            lastName : req.body.lastname,
+			firstName : req.body.firstName,
+            lastName : req.body.lastName,
             tel : req.body.tel,
             street : req.body.street,
             postcode : req.body.postcode,
@@ -82,7 +82,7 @@ module.exports = {
      */
     update: function (req, res) {
         var id = req.params.id;
-        console.log(req.body.firstname)
+        console.log(req.body.firstName)
 
         UserModel.findOne({_id: id}, function (err, user) {
             if (err) {
@@ -99,8 +99,8 @@ module.exports = {
             }
 
 			user.email = req.body.email ? req.body.email : user.email;
-            user.firstName = req.body.firstname ? req.body.firstname : user.firstName;
-            user.lastName = req.body.lastname ? req.body.lastname : user.lastName;
+            user.firstName = req.body.firstName ? req.body.firstName : user.firstName;
+            user.lastName = req.body.lastName ? req.body.lastName : user.lastName;
             user.tel = req.body.tel ? req.body.tel : user.tel;
             user.street = req.body.street ? req.body.street : user.street;
             user.postcode = req.body.postcode ? req.body.postcode : user.postcode;
