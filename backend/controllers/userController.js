@@ -59,7 +59,7 @@ module.exports = {
             tel : req.body.tel,
             street : req.body.street,
             postcode : req.body.postcode,
-            path : "/images/" + req.file.filename,
+            path : "/images/" + req.body.username,
             lat : req.body.lat,
             lng : req.body.lng
         });

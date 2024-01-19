@@ -1,7 +1,20 @@
 var express = require('express');
 
 var multer = require('multer');
-var upload = multer({dest: 'public/images/'});
+//var upload = multer({dest: 'public/images/'});
+var upload = multer({
+    dest: 'public/images/',
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, 'public/images/');
+        },
+        filename: function (req, file, cb) {
+            // Use the username as the filename
+            const username = req.body.username; // Assuming the username is sent in the request body
+            cb(null, username + '.jpg');
+        }
+    })
+});
 
 var router = express.Router();
 var userController = require('../controllers/userController.js');
