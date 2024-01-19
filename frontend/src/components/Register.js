@@ -58,8 +58,26 @@ function Register() {
             body: formData,
         });
 
+        console.log("path" + username)
+
         const data = await res.json();
-        if (data._id !== undefined) {
+        if (data._id !== undefined)
+        {
+
+            const res1 = await fetch('http://localhost:3001/api/CD', {
+                method: 'POST',
+                credentials: 'include',
+                body: formData,
+            });
+
+            if (res1.ok) {
+                const data = await res1.json();
+                console.log(data);
+            } else {
+                // Obravnavanje napake
+                console.error('Napaka pri pošiljanju zahteve:', res1.status, res1.statusText);
+            }
+
             window.location.href = '/';
         } else {
             setUsername('');
