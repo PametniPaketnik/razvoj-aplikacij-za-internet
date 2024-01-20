@@ -64,7 +64,7 @@ function Register() {
         if (data._id !== undefined)
         {
 
-            const res1 = await fetch('http://localhost:3001/api/CD', {
+            const res1 = await fetch('http://localhost:3001/api/CD/compress', {
                 method: 'POST',
                 credentials: 'include',
                 body: formData,
@@ -72,9 +72,8 @@ function Register() {
 
             if (res1.ok) {
                 const data = await res1.json();
-                console.log(data);
+                //console.log(data);
             } else {
-                // Obravnavanje napake
                 console.error('Napaka pri pošiljanju zahteve:', res1.status, res1.statusText);
             }
 

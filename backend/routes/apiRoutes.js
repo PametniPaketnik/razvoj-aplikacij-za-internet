@@ -25,6 +25,9 @@ router.get('/history/:id', historyController.get);
 router.post('/history/', upload.none(), historyController.add);
 
 router.post('/facedetection', uploadUserImage.single('image'), faceDetectionController.detect);
-router.post('/CD', uploadUserImage.single('image'), CDController.detect);
+
+router.post('/CD/compress', uploadUserImage.single('image'), CDController.compress);
+router.post('/CD/decompress', uploadUserImage.single('image'), CDController.decompress);
+
 
 module.exports = router;

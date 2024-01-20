@@ -7,6 +7,16 @@ import './styles/Profile.css';
 function Profile(){
     const userContext = useContext(UserContext); 
     const [profile, setProfile] = useState({});
+    const [path, setPath] = useState({});
+
+
+    useEffect(() => {
+        const decompressOnMount = async () => {
+            await decompressImage(profile.username);
+        };
+
+        decompressOnMount();
+    }, [profile.username]);
 
     useEffect(function(){
         const getProfile = async function(){
@@ -20,6 +30,34 @@ function Profile(){
     const imageUrl = profile.path ? `http://localhost:3001/${profile.path}` : null;
     console.log("Image URL:", imageUrl);
 
+    const decompressImage = async (username) => {
+        const formData = new FormData();
+        formData.append('username', username);
+
+        try {
+            const res = await fetch('http://localhost:3001/api/CD/decompress', {
+                method: 'POST',
+                credentials: 'include',
+                body: formData,
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                //console.log(data);
+                setPath({
+                    path: `${username}_decompressed.bmp`, // replace with the actual path
+                });
+
+                console.log("Path", path.path)
+
+            } else {
+                console.error('Error triggering decompression:', res.status, res.statusText);
+            }
+        } catch (error) {
+            console.error('Error during decompression:', error);
+        }
+    };
+
     return (
     <div className="user-profile">
         <>  {!userContext.user ? <Navigate replace to="/login"/> : ""}
@@ -27,6 +65,7 @@ function Profile(){
             <img className="profile-image"
                  src={`http://localhost:3001/${profile.path}.jpg`}
                  alt={profile.username}/>
+
             <div className="profile-info">
                 <div>
                     <h4 className="label">Username:</h4>

@@ -1,40 +1,76 @@
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
 const CDController = {
-    detect: async (req, res) => {
-
+    compressImage: async (req, res, operation) => {
         const pythonScriptPath = path.join(__dirname, '../../../../racunalniska-vecpredstavnost/compresion.py');
-        username = req.body.username;
-        console.log('ScriptPath:', pythonScriptPath);
-
+        const username = req.body.username;
         const imagePath = path.join(__dirname, '../../public/images', `${username}.jpg`);
-        console.log('ImagePath:', imagePath);
-
         const pythonExecutable = 'C:/Users/sabin/AppData/Local/Programs/Python/Python312/python.exe';
 
-        const script = `${pythonExecutable} ${pythonScriptPath} ${imagePath}`
+        const script = `${pythonExecutable} ${pythonScriptPath} ${imagePath}`;
+        const childProcess = spawn(script, { shell: true });
 
-        exec(script, (error, stdout, stderr) => {
+        let output = '';
 
-            if (error) {
-                console.error(`Error executing Python script: ${error}`);
-                return res.status(500).json({ error: 'Internal Server Error' });
-            }
-            console.log('Python script executed successfully');
-            const output = stdout.trim();
-            console.log(output)
-
-            // Save the output to a file
-            const outputFilePath = path.join(__dirname, '../../public/output', `${username}_output.txt`);
-            fs.writeFileSync(outputFilePath, output);
-
-            // You can handle the result as needed
-            //console.log('Script output:', stdout);
-            res.status(200).json({ result: 'Success' });
+        childProcess.stdout.on('data', (data) => {
+            output += data.toString();
         });
 
+        childProcess.stderr.on('data', (data) => {
+            console.error(`Error output: ${data}`);
+        });
+
+        childProcess.on('error', (error) => {
+            console.error(`Error executing Python script: ${error}`);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+
+        childProcess.on('close', (code) => {
+            console.log('Python script executed successfully');
+            const outputFilePath = path.join(__dirname, '../../public/output', `${username}_output.txt`);
+            fs.writeFileSync(outputFilePath, output, 'utf8');
+            res.status(200).json({ result: 'Success' });
+        });
+    },
+
+    decompressImage: async (req, res) => {
+        const pythonScriptPath = path.join(__dirname, '../../../../racunalniska-vecpredstavnost/decompresion.py');
+        const username = req.body.username;
+        const outputFilePath = path.join(__dirname, '../../public/output', `${username}_output.txt`);
+        const pythonExecutable = 'C:/Users/sabin/AppData/Local/Programs/Python/Python312/python.exe';
+
+        const script = `${pythonExecutable} ${pythonScriptPath} ${outputFilePath} ${username}`;
+        const childProcess = spawn(script, { shell: true });
+
+        let output = '';
+
+        childProcess.stdout.on('data', (data) => {
+            output += data.toString();
+        });
+
+        childProcess.stderr.on('data', (data) => {
+            console.error(`Error output: ${data}`);
+        });
+
+        childProcess.on('error', (error) => {
+            console.error(`Error executing Python script: ${error}`);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+
+        childProcess.on('close', (code) => {
+            console.log('Python script executed successfully');
+            res.status(200).json({ result: 'Success' });
+        });
+    },
+
+    compress: async (req, res) => {
+        await CDController.compressImage(req, res, 'compress');
+    },
+
+    decompress: async (req, res) => {
+        await CDController.decompressImage(req, res, 'decompress');
     },
 };
 
